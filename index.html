@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retro Multiplayer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #121213;
+      color: white;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: #1a1a1b;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #333;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #555;
+      background: #222;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    button {
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      background: #538d4e;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    .secondary-btn {
+      background: #3a3a3c;
+    }
+
+    .error {
+      color: #ff7b7b;
+      margin-top: 12px;
+    }
+
+    .success {
+      color: #8ee28b;
+      margin-top: 12px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    code {
+      background: #333;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .host-badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #6a4;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Retro Multiplayer</h1>
+
+  <div id="homeScreen" class="grid">
+    <div class="card">
+      <h2>Utwórz pokój</h2>
+
+      <label for="hostName">Twoje imię</label>
+      <input id="hostName" type="text" placeholder="Np. Michał" />
+
+      <button id="createRoomBtn">Utwórz pokój</button>
+
+      <div id="createMessage"></div>
+      <div id="createResult"></div>
+    </div>
+
+    <div class="card">
+      <h2>Dołącz do pokoju</h2>
+
+      <label for="joinName">Twoje imię</label>
+      <input id="joinName" type="text" placeholder="Np. Anna" />
+
+      <label for="roomCode">Kod pokoju</label>
+      <input id="roomCode" type="text" placeholder="Np. ABC123" />
+
+      <button id="joinRoomBtn">Dołącz do pokoju</button>
+
+      <div id="joinMessage"></div>
+      <div id="joinResult"></div>
+    </div>
+  </div>
+
+  <div id="lobbyScreen" class="hidden">
+    <div class="card">
+      <h2>Lobby pokoju</h2>
+      <p><strong>Kod pokoju:</strong> <code id="lobbyRoomCode"></code></p>
+      <p><strong>Status:</strong> <span id="lobbyStatus"></span></p>
+      <p><strong>Twoje imię:</strong> <span id="lobbyPlayerName"></span></p>
+
+      <div id="hostControls" class="hidden">
+        <button id="startGameBtn">Rozpocznij grę</button>
+      </div>
+
+      <h3>Gracze w pokoju</h3>
+      <ul id="playersList"></ul>
+
+      <button id="refreshPlayersBtn" class="secondary-btn">Odśwież listę graczy</button>
+      <button id="refreshRoomBtn" class="secondary-btn">Odśwież status pokoju</button>
+      <button id="goToGameBtn" class="secondary-btn hidden">Przejdź do gry</button>
+      <button id="backBtn" class="secondary-btn">Wróć do ekranu startowego</button>
+
+      <div id="lobbyMessage"></div>
+    </div>
+  </div>
+
+  <div id="gameScreen" class="hidden">
+    <div class="card">
+      <h2>Ekran gry</h2>
+      <p><strong>Kod pokoju:</strong> <code id="gameRoomCode"></code></p>
+      <p><strong>Gracz:</strong> <span id="gamePlayerName"></span></p>
+
+      <label for="guessInput">Wpisz 5-literowe słowo</label>
+      <input id="guessInput" type="text" maxlength="5" placeholder="Np. BARAN" />
+
+      <button id="submitGuessBtn">Wyślij próbę</button>
+      <button id="backToLobbyBtn" class="secondary-btn">Wróć do lobby</button>
+
+      <div id="gameMessage"></div>
+
+      <h3>Twoje zapisane próby</h3>
+      <ul id="guessesList"></ul>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+
+	const SUPABASE_URL = 'https://pxqntbicakhzyxismpje.supabase.co'
+    const SUPABASE_KEY = 'sb_publishable_AqryRtQ7i_1m_GcCsdErkg_3hU9WjIk'
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+
+    const WORDS = [
+      "BLASK","BARAN","BŁOTO","BURAK","BURZA","CEGŁA","CHATA","CHLEB","DESKA","DZWON",
+      "GŁOWA","GROCH","ISKRA","JAJKO","KAMYK","KARTA","KASZA","KLUCZ","KREDA","KRZAK",
+      "LAMPA","MASKA","MISKA","MUCHA","PALMA","PALEC","PASEK","PLAMA","POMOC","POTOK",
+      "PROSO","PRĘGA","PSOTA","RZEPA","SADZA","SERCE","SKALA","SKIBA","SŁOMA","SMUGA",
+      "SOSNA","ŚCIEG","ŚLIWA","SZAFA","SZATA","SZNUR","SZRON","TABUN","TOPÓR","TRAWA",
+      "BRZEG","CIERŃ","GRUDA","KOCYK","KWOKA","LARWA","MIĘSO","OGRÓD","OKRUS","PIÓRO",
+      "SFORA","STRÓJ","ŚRODA","TKACZ","WANNA","WĄTEK","WRZOS","ZAJĄC","ZORZA","ŁAWKA",
+      "ŁYŻKA","JUCHA","NĘDZA","WYDRA","SUTEK","BĘBEN","BRONA","DYMEK","GAŁĄŹ","GĄSKA",
+      "GWARA","KŁODA","KROWA","NORKA","OWIES","PUCHA","SZEPT","ZBOŻE","MIEDŹ","ROWEK",
+      "BREJA","CZAPA","GNIEW","LILIA","PŁUCA","SIDŁO","STRUG","ŻARNA","WRĘGA","GRAPA"
+    ].filter(w => w.length === 5);
+
+    let currentRoom = null;
+    let currentPlayerName = '';
+    let currentIsHost = false;
+    let currentPlayer = null;
+	
+	function saveSession() {
+  localStorage.setItem('retro_currentRoom', JSON.stringify(currentRoom));
+  localStorage.setItem('retro_currentPlayer', JSON.stringify(currentPlayer));
+  localStorage.setItem('retro_currentPlayerName', currentPlayerName);
+  localStorage.setItem('retro_currentIsHost', JSON.stringify(currentIsHost));
+}
+
+function clearSession() {
+  localStorage.removeItem('retro_currentRoom');
+  localStorage.removeItem('retro_currentPlayer');
+  localStorage.removeItem('retro_currentPlayerName');
+  localStorage.removeItem('retro_currentIsHost');
+}
+
+function restoreSession() {
+  const savedRoom = localStorage.getItem('retro_currentRoom');
+  const savedPlayer = localStorage.getItem('retro_currentPlayer');
+  const savedPlayerName = localStorage.getItem('retro_currentPlayerName');
+  const savedIsHost = localStorage.getItem('retro_currentIsHost');
+
+  if (!savedRoom || !savedPlayer || !savedPlayerName || !savedIsHost) {
+    return false;
+  }
+
+  try {
+    currentRoom = JSON.parse(savedRoom);
+    currentPlayer = JSON.parse(savedPlayer);
+    currentPlayerName = savedPlayerName;
+    currentIsHost = JSON.parse(savedIsHost);
+    return true;
+  } catch (e) {
+    clearSession();
+    return false;
+  }
+}
+
+    const homeScreen = document.getElementById('homeScreen');
+    const lobbyScreen = document.getElementById('lobbyScreen');
+    const gameScreen = document.getElementById('gameScreen');
+
+    const hostNameInput = document.getElementById('hostName');
+    const createRoomBtn = document.getElementById('createRoomBtn');
+    const createMessageEl = document.getElementById('createMessage');
+    const createResultEl = document.getElementById('createResult');
+
+    const joinNameInput = document.getElementById('joinName');
+    const roomCodeInput = document.getElementById('roomCode');
+    const joinRoomBtn = document.getElementById('joinRoomBtn');
+    const joinMessageEl = document.getElementById('joinMessage');
+    const joinResultEl = document.getElementById('joinResult');
+
+    const lobbyRoomCodeEl = document.getElementById('lobbyRoomCode');
+    const lobbyStatusEl = document.getElementById('lobbyStatus');
+    const lobbyPlayerNameEl = document.getElementById('lobbyPlayerName');
+    const playersListEl = document.getElementById('playersList');
+    const refreshPlayersBtn = document.getElementById('refreshPlayersBtn');
+    const refreshRoomBtn = document.getElementById('refreshRoomBtn');
+    const backBtn = document.getElementById('backBtn');
+    const lobbyMessageEl = document.getElementById('lobbyMessage');
+    const hostControlsEl = document.getElementById('hostControls');
+    const startGameBtn = document.getElementById('startGameBtn');
+    const goToGameBtn = document.getElementById('goToGameBtn');
+
+    const gameRoomCodeEl = document.getElementById('gameRoomCode');
+    const gamePlayerNameEl = document.getElementById('gamePlayerName');
+    const guessInput = document.getElementById('guessInput');
+    const submitGuessBtn = document.getElementById('submitGuessBtn');
+    const backToLobbyBtn = document.getElementById('backToLobbyBtn');
+    const gameMessageEl = document.getElementById('gameMessage');
+    const guessesListEl = document.getElementById('guessesList');
+
+    function showMessage(element, text, type = 'error') {
+      element.className = type;
+      element.textContent = text;
+    }
+
+    function clearMessage(element) {
+      element.className = '';
+      element.textContent = '';
+    }
+
+    function generateRoomCode() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let code = '';
+      for (let i = 0; i < 6; i++) {
+        code += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return code;
+    }
+
+    function pickRandomWord() {
+      return WORDS[Math.floor(Math.random() * WORDS.length)];
+    }
+
+    async function createUniqueRoomCode() {
+      for (let i = 0; i < 10; i++) {
+        const code = generateRoomCode();
+
+        const { data, error } = await supabase
+          .from('rooms')
+          .select('id')
+          .eq('code', code)
+          .maybeSingle();
+
+        if (error) throw error;
+        if (!data) return code;
+      }
+
+      throw new Error('Nie udało się wygenerować unikalnego kodu pokoju.');
+    }
+
+    function renderHostControls() {
+      if (currentIsHost) {
+        hostControlsEl.classList.remove('hidden');
+      } else {
+        hostControlsEl.classList.add('hidden');
+      }
+    }
+
+    function renderGoToGameButton() {
+      if (currentRoom && currentRoom.status === 'active') {
+        goToGameBtn.classList.remove('hidden');
+      } else {
+        goToGameBtn.classList.add('hidden');
+      }
+    }
+
+    function showLobby(room, playerName, isHost = false, player = null) {
+      currentRoom = room;
+      currentPlayerName = playerName;
+      currentIsHost = isHost;
+      currentPlayer = player;
+
+      homeScreen.classList.add('hidden');
+      gameScreen.classList.add('hidden');
+      lobbyScreen.classList.remove('hidden');
+
+      lobbyRoomCodeEl.textContent = room.code;
+      lobbyStatusEl.textContent = room.status;
+      lobbyPlayerNameEl.textContent = playerName;
+
+      renderHostControls();
+      renderGoToGameButton();
+	  saveSession();
+      loadPlayers();
+    }
+
+    function showGame() {
+      if (!currentRoom || !currentPlayer) return;
+
+      lobbyScreen.classList.add('hidden');
+      gameScreen.classList.remove('hidden');
+
+      gameRoomCodeEl.textContent = currentRoom.code;
+      gamePlayerNameEl.textContent = currentPlayerName;
+      guessInput.value = '';
+
+      saveSession();
+	  loadMyGuesses();
+    }
+
+    function showHome() {
+      currentRoom = null;
+      currentPlayerName = '';
+      currentIsHost = false;
+      currentPlayer = null;
+	  clearSession();
+
+      lobbyScreen.classList.add('hidden');
+      gameScreen.classList.add('hidden');
+      homeScreen.classList.remove('hidden');
+
+      clearMessage(lobbyMessageEl);
+      clearMessage(gameMessageEl);
+      playersListEl.innerHTML = '';
+      guessesListEl.innerHTML = '';
+    }
+
+    async function refreshRoomStatus() {
+  if (!currentRoom) return;
+
+  clearMessage(lobbyMessageEl);
+
+  try {
+    const { data: room, error } = await supabase
+      .from('rooms')
+      .select('*')
+      .eq('id', currentRoom.id)
+      .single();
+
+    if (error) throw error;
+
+    currentRoom = room;
+    lobbyStatusEl.textContent = room.status;
+    renderGoToGameButton();
+
+    if (room.status === 'finished') {
+      showMessage(lobbyMessageEl, 'Gra zakończona. Ranking jest już ostateczny.', 'success');
+    } else {
+      showMessage(lobbyMessageEl, `Status pokoju: ${room.status}`, 'success');
+    }
+  } catch (error) {
+    showMessage(lobbyMessageEl, `Błąd: ${error.message}`);
+  }
+}
+
+async function loadPlayers() {
+  if (!currentRoom) return;
+
+  clearMessage(lobbyMessageEl);
+  playersListEl.innerHTML = '<li>Ładowanie...</li>';
+
+  try {
+    const { data, error } = await supabase
+      .from('players')
+      .select('*')
+      .eq('room_id', currentRoom.id);
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      playersListEl.innerHTML = '<li>Brak graczy w pokoju.</li>';
+      return;
+    }
+
+    const sortedPlayers = [...data].sort((a, b) => {
+      if (a.is_winner && !b.is_winner) return -1;
+      if (!a.is_winner && b.is_winner) return 1;
+
+      if (a.solved && !b.solved) return -1;
+      if (!a.solved && b.solved) return 1;
+
+      if (a.solved && b.solved) {
+        if ((a.attempts_used || 99) !== (b.attempts_used || 99)) {
+          return (a.attempts_used || 99) - (b.attempts_used || 99);
+        }
+
+        const aSolvedAt = a.solved_at ? new Date(a.solved_at).getTime() : Number.MAX_SAFE_INTEGER;
+        const bSolvedAt = b.solved_at ? new Date(b.solved_at).getTime() : Number.MAX_SAFE_INTEGER;
+        return aSolvedAt - bSolvedAt;
+      }
+
+      if (!a.finished_at && b.finished_at) return -1;
+      if (a.finished_at && !b.finished_at) return 1;
+
+      const aJoined = a.joined_at ? new Date(a.joined_at).getTime() : Number.MAX_SAFE_INTEGER;
+      const bJoined = b.joined_at ? new Date(b.joined_at).getTime() : Number.MAX_SAFE_INTEGER;
+      return aJoined - bJoined;
+    });
+
+    playersListEl.innerHTML = sortedPlayers
+      .map((player, index) => {
+        let statusText = 'W trakcie gry';
+
+        if (player.solved === true) {
+          statusText = `Odgadł w ${player.attempts_used} próbach`;
+        } else if (player.finished_at && player.solved === false) {
+          statusText = `Nie odgadł w 6 próbach`;
+        }
+
+        const crown = player.is_winner ? ' 👑' : '';
+        const place = `${index + 1}.`;
+
+        return `
+          <li>
+            <strong>${place} ${player.name}</strong>${crown}
+            ${player.is_host ? '<span class="host-badge">Host</span>' : ''}
+            — ${statusText}
+          </li>
+        `;
+      })
+      .join('');
+  } catch (error) {
+    playersListEl.innerHTML = '';
+    showMessage(lobbyMessageEl, `Błąd: ${error.message}`);
+  }
+}
+
+    async function loadMyGuesses() {
+if (!currentPlayer) return;
+
+guessesListEl.innerHTML = '<li>Ładowanie...</li>';
+
+      try {
+        const { data, error } = await supabase
+          .from('guesses')
+          .select('*')
+          .eq('player_id', currentPlayer.id)
+          .order('attempt_number', { ascending: true });
+
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+          guessesListEl.innerHTML = '<li>Brak prób.</li>';
+          return;
+        }
+
+        guessesListEl.innerHTML = data
+          .map(guess => `<li>Próba ${guess.attempt_number}: ${guess.guess_word}</li>`)
+          .join('');
+      } catch (error) {
+        guessesListEl.innerHTML = '';
+        showMessage(gameMessageEl, `Błąd: ${error.message}`);
+      }
+    }
+
+async function submitGuess() {
+  if (!currentRoom || !currentPlayer) return;
+
+  clearMessage(gameMessageEl);
+
+  const guessWord = guessInput.value.trim().toUpperCase();
+
+  if (!guessWord) {
+    showMessage(gameMessageEl, 'Wpisz słowo.');
+    return;
+  }
+
+  if (guessWord.length !== 5) {
+    showMessage(gameMessageEl, 'Słowo musi mieć 5 liter.');
+    return;
+  }
+
+  if (!WORDS.includes(guessWord)) {
+    showMessage(gameMessageEl, 'To słowo nie jest na liście haseł.');
+    return;
+  }
+
+  submitGuessBtn.disabled = true;
+
+  try {
+    const { data: freshRoom, error: roomRefreshError } = await supabase
+      .from('rooms')
+      .select('*')
+      .eq('id', currentRoom.id)
+      .single();
+
+    if (roomRefreshError) throw roomRefreshError;
+
+    currentRoom = freshRoom;
+
+    const { data: freshPlayer, error: playerRefreshError } = await supabase
+      .from('players')
+      .select('*')
+      .eq('id', currentPlayer.id)
+      .single();
+
+    if (playerRefreshError) throw playerRefreshError;
+
+    currentPlayer = freshPlayer;
+
+    if (currentPlayer.solved === true) {
+      showMessage(gameMessageEl, 'Już odgadłeś hasło. Nie możesz wysyłać kolejnych prób.', 'error');
+      return;
+    }
+
+    if (currentPlayer.finished_at && currentPlayer.solved === false) {
+      showMessage(gameMessageEl, 'Gra dla Ciebie już się zakończyła. Wykorzystałeś wszystkie próby.', 'error');
+      return;
+    }
+
+    const secretWordNormalized = (currentRoom.secret_word || '').trim().toUpperCase();
+
+    const { data: existingGuesses, error: countError } = await supabase
+      .from('guesses')
+      .select('id')
+      .eq('player_id', currentPlayer.id);
+
+    if (countError) throw countError;
+
+    const attemptNumber = (existingGuesses?.length || 0) + 1;
+
+    if (attemptNumber > 6) {
+      showMessage(gameMessageEl, 'Wykorzystałeś już 6 prób.');
+      return;
+    }
+
+    const { error: insertError } = await supabase
+      .from('guesses')
+      .insert({
+        room_id: currentRoom.id,
+        player_id: currentPlayer.id,
+        guess_word: guessWord,
+        attempt_number: attemptNumber
+      });
+
+    if (insertError) throw insertError;
+
+    if (guessWord === secretWordNormalized) {
+      const now = new Date().toISOString();
+
+      const { data: updatedPlayer, error: updatePlayerError } = await supabase
+        .from('players')
+        .update({
+          solved: true,
+          attempts_used: attemptNumber,
+          solved_at: now,
+          finished_at: now
+        })
+        .eq('id', currentPlayer.id)
+        .select()
+        .single();
+
+      if (updatePlayerError) throw updatePlayerError;
+
+      currentPlayer = updatedPlayer;
+
+      const { data: winners, error: winnersError } = await supabase
+        .from('players')
+        .select('*')
+        .eq('room_id', currentRoom.id)
+        .eq('solved', true)
+        .order('attempts_used', { ascending: true })
+        .order('solved_at', { ascending: true });
+
+      if (winnersError) throw winnersError;
+
+      if (winners && winners.length > 0) {
+        const winnerId = winners[0].id;
+
+        const { error: resetWinnersError } = await supabase
+          .from('players')
+          .update({ is_winner: false })
+          .eq('room_id', currentRoom.id);
+
+        if (resetWinnersError) throw resetWinnersError;
+
+        const { error: setWinnerError } = await supabase
+          .from('players')
+          .update({ is_winner: true })
+          .eq('id', winnerId);
+
+        if (setWinnerError) throw setWinnerError;
+      }
+
+      gameMessageEl.innerHTML = `<div class="success">Brawo! Odgadłeś hasło w ${attemptNumber} próbach. Hasło: ${secretWordNormalized}</div>`;
+    } else if (attemptNumber === 6) {
+      const now = new Date().toISOString();
+
+      const { data: updatedPlayer, error: updatePlayerError } = await supabase
+        .from('players')
+        .update({
+          solved: false,
+          attempts_used: attemptNumber,
+          finished_at: now
+        })
+        .eq('id', currentPlayer.id)
+        .select()
+        .single();
+
+      if (updatePlayerError) throw updatePlayerError;
+
+      currentPlayer = updatedPlayer;
+
+      showMessage(
+        gameMessageEl,
+        `To była 6 próba. Nie udało się odgadnąć hasła.`,
+        'error'
+      );
+    } else {
+      showMessage(
+        gameMessageEl,
+        `Zapisano próbę nr ${attemptNumber}.`,
+        'success'
+      );
+    }
+
+    const { data: allPlayers, error: allPlayersError } = await supabase
+      .from('players')
+      .select('*')
+      .eq('room_id', currentRoom.id);
+
+    if (allPlayersError) throw allPlayersError;
+
+    const allFinished = allPlayers.every(player => !!player.finished_at);
+
+    if (allFinished && currentRoom.status !== 'finished') {
+      const { data: updatedRoom, error: finishRoomError } = await supabase
+        .from('rooms')
+        .update({
+          status: 'finished',
+          ended_at: new Date().toISOString()
+        })
+        .eq('id', currentRoom.id)
+        .select()
+        .single();
+
+      if (finishRoomError) throw finishRoomError;
+
+      currentRoom = updatedRoom;
+    }
+
+    guessInput.value = '';
+    loadMyGuesses();
+  } catch (error) {
+    showMessage(gameMessageEl, `Błąd: ${error.message}`);
+  } finally {
+    submitGuessBtn.disabled = false;
+  }
+}
+    async function startGame() {
+      if (!currentRoom || !currentIsHost) return;
+
+      clearMessage(lobbyMessageEl);
+      startGameBtn.disabled = true;
+
+      try {
+        const { data: updatedRoom, error } = await supabase
+          .from('rooms')
+          .update({
+            status: 'active',
+            started_at: new Date().toISOString()
+          })
+          .eq('id', currentRoom.id)
+          .select()
+          .single();
+
+        if (error) throw error;
+
+        currentRoom = updatedRoom;
+        lobbyStatusEl.textContent = updatedRoom.status;
+        renderGoToGameButton();
+
+        showMessage(lobbyMessageEl, 'Gra została rozpoczęta. Status pokoju zmieniony na active.', 'success');
+      } catch (error) {
+        showMessage(lobbyMessageEl, `Błąd: ${error.message}`);
+      } finally {
+        startGameBtn.disabled = false;
+      }
+    }
+
+    async function createRoom() {
+      clearMessage(createMessageEl);
+      createResultEl.innerHTML = '';
+
+      const hostName = hostNameInput.value.trim();
+
+      if (!hostName) {
+        showMessage(createMessageEl, 'Wpisz swoje imię.');
+        return;
+      }
+
+      createRoomBtn.disabled = true;
+
+      try {
+        const roomCode = await createUniqueRoomCode();
+        const secretWord = pickRandomWord();
+
+        const { data: room, error: roomError } = await supabase
+          .from('rooms')
+          .insert({
+            code: roomCode,
+            host_name: hostName,
+            secret_word: secretWord,
+            status: 'waiting'
+          })
+          .select()
+          .single();
+
+        if (roomError) throw roomError;
+
+        const { data: player, error: playerError } = await supabase
+          .from('players')
+          .insert({
+            room_id: room.id,
+            name: hostName,
+            is_host: true
+          })
+          .select()
+          .single();
+
+        if (playerError) throw playerError;
+
+        showMessage(createMessageEl, 'Pokój został utworzony.', 'success');
+        createResultEl.innerHTML = `
+          <p><strong>Kod pokoju:</strong> <code>${room.code}</code></p>
+          <p><strong>Host:</strong> ${hostName}</p>
+        `;
+
+        showLobby(room, hostName, true, player);
+      } catch (error) {
+        showMessage(createMessageEl, `Błąd: ${error.message}`);
+      } finally {
+        createRoomBtn.disabled = false;
+      }
+    }
+
+    async function joinRoom() {
+      clearMessage(joinMessageEl);
+      joinResultEl.innerHTML = '';
+
+      const playerName = joinNameInput.value.trim();
+      const roomCode = roomCodeInput.value.trim().toUpperCase();
+
+      if (!playerName) {
+        showMessage(joinMessageEl, 'Wpisz swoje imię.');
+        return;
+      }
+
+      if (!roomCode) {
+        showMessage(joinMessageEl, 'Wpisz kod pokoju.');
+        return;
+      }
+
+      joinRoomBtn.disabled = true;
+
+      try {
+        const { data: room, error: roomError } = await supabase
+          .from('rooms')
+          .select('*')
+          .eq('code', roomCode)
+          .maybeSingle();
+
+        if (roomError) throw roomError;
+
+        if (!room) {
+          showMessage(joinMessageEl, 'Nie znaleziono pokoju o takim kodzie.');
+          return;
+        }
+
+        const { data: player, error: playerError } = await supabase
+          .from('players')
+          .insert({
+            room_id: room.id,
+            name: playerName,
+            is_host: false
+          })
+          .select()
+          .single();
+
+        if (playerError) throw playerError;
+
+        showMessage(joinMessageEl, 'Dołączono do pokoju.', 'success');
+        joinResultEl.innerHTML = `
+          <p><strong>Pokój:</strong> <code>${room.code}</code></p>
+          <p><strong>Twoje imię:</strong> ${playerName}</p>
+          <p><strong>Status pokoju:</strong> ${room.status}</p>
+        `;
+
+        showLobby(room, playerName, false, player);
+      } catch (error) {
+        showMessage(joinMessageEl, `Błąd: ${error.message}`);
+      } finally {
+        joinRoomBtn.disabled = false;
+      }
+    }
+
+    createRoomBtn.addEventListener('click', createRoom);
+    joinRoomBtn.addEventListener('click', joinRoom);
+    refreshPlayersBtn.addEventListener('click', loadPlayers);
+    refreshRoomBtn.addEventListener('click', refreshRoomStatus);
+    backBtn.addEventListener('click', showHome);
+    startGameBtn.addEventListener('click', startGame);
+    goToGameBtn.addEventListener('click', showGame);
+    submitGuessBtn.addEventListener('click', submitGuess);
+    backToLobbyBtn.addEventListener('click', () => showLobby(currentRoom, currentPlayerName, currentIsHost, currentPlayer));
+	if (restoreSession()) {
+  showLobby(currentRoom, currentPlayerName, currentIsHost, currentPlayer);
+}
+  </script>
+</body>
+</html>
