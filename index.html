@@ -102,16 +102,289 @@
       font-size: 12px;
       font-weight: bold;
     }
+	
+	    .lobby-help-card {
+      background: #18181a;
+      border-color: #3a3a3c;
+    }
+
+    .lobby-help-card h2 {
+      margin-bottom: 16px;
+    }
+
+    .lobby-help-card h3 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #d7dadc;
+      font-size: 18px;
+    }
+
+    .lobby-help-card ul {
+      margin: 0 0 12px 0;
+      padding-left: 20px;
+    }
+
+    .lobby-help-card li {
+      margin-bottom: 10px;
+      line-height: 1.5;
+      color: #d7dadc;
+    }
 
     @media (max-width: 720px) {
       .grid {
         grid-template-columns: 1fr;
       }
     }
+	.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 20px;
+  background: #2f2f31;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-btn:hover {
+  background: #3b3b3d;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 999;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal {
+  background: #1a1a1b;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  border: 1px solid #2f2f31;
+}
+
+.modal h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.modal p, .modal li {
+  line-height: 1.5;
+  color: #d7dadc;
+}
+
+.modal ul {
+  padding-left: 18px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.legend {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legend-box {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid #666;
+}
+
+.legend-box.correct { background: #538d4e; border-color: #538d4e; }
+.legend-box.present { background: #b59f3b; border-color: #b59f3b; }
+.legend-box.absent { background: #3a3a3c; border-color: #3a3a3c; }
+.board {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  gap: 6px;
+  margin: 20px 0 24px;
+  justify-content: center;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(5, 62px);
+  gap: 6px;
+}
+
+.tile {
+  width: 62px;
+  height: 62px;
+  border: 2px solid #3a3a3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: #121213;
+  color: #ffffff;
+  user-select: none;
+}
+
+@media (max-width: 520px) {
+  .row {
+    grid-template-columns: repeat(5, 54px);
+  }
+
+  .tile {
+    width: 54px;
+    height: 54px;
+    font-size: 1.8rem;
+  }
+}
+.tile.correct {
+  background: #538d4e;
+  border-color: #538d4e;
+}
+
+.tile.present {
+  background: #b59f3b;
+  border-color: #b59f3b;
+}
+
+.tile.absent {
+  background: #3a3a3c;
+  border-color: #3a3a3c;
+}
+
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 520px;
+  margin-top: 20px;
+}
+
+.key-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.key {
+  min-width: 42px;
+  height: 58px;
+  border: none;
+  border-radius: 6px;
+  background: #818384;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 0 8px;
+}
+
+.key.wide {
+  min-width: 72px;
+  font-size: 12px;
+}
+
+@media (max-width: 520px) {
+  .key {
+    min-width: 32px;
+    height: 52px;
+    font-size: 13px;
+    padding: 0 6px;
+  }
+
+  .key.wide {
+    min-width: 62px;
+  }
+}
+#gameScreen .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#gameScreen h2,
+#gameScreen p,
+#gameScreen #gameMessage {
+  width: 100%;
+}
+
+#gameScreen #submitGuessBtn,
+#gameScreen #backToLobbyBtn {
+  align-self: center;
+}
+.key.correct {
+  background: #538d4e;
+}
+
+.key.present {
+  background: #b59f3b;
+}
+
+.key.absent {
+  background: #3a3a3c;
+}
+.tile.flip {
+  animation: flip 0.28s ease forwards;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0);
+  }
+  49% {
+    transform: rotateX(90deg);
+  }
+  51% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0);
+  }
+}
   </style>
 </head>
 <body>
+<div class="top-bar">
   <h1>Retro Multiplayer</h1>
+  <button class="icon-btn" id="helpBtn" aria-label="Instrukcja gry">?</button>
+</div>
 
   <div id="homeScreen" class="grid">
     <div class="card">
@@ -142,7 +415,7 @@
     </div>
   </div>
 
-  <div id="lobbyScreen" class="hidden">
+    <div id="lobbyScreen" class="hidden">
     <div class="card">
       <h2>Lobby pokoju</h2>
       <p><strong>Kod pokoju:</strong> <code id="lobbyRoomCode"></code></p>
@@ -156,33 +429,204 @@
       <h3>Gracze w pokoju</h3>
       <ul id="playersList"></ul>
 
-      <button id="refreshPlayersBtn" class="secondary-btn">Odśwież listę graczy</button>
-      <button id="refreshRoomBtn" class="secondary-btn">Odśwież status pokoju</button>
+      <button id="refreshPlayersBtn" class="secondary-btn hidden">Odśwież listę graczy</button>
+      <button id="refreshRoomBtn" class="secondary-btn hidden">Odśwież status pokoju</button>
       <button id="goToGameBtn" class="secondary-btn hidden">Przejdź do gry</button>
       <button id="backBtn" class="secondary-btn">Wróć do ekranu startowego</button>
 
       <div id="lobbyMessage"></div>
     </div>
+
+    <div class="card lobby-help-card">
+  <h2>Instrukcja lobby</h2>
+
+      <h3>Jak działa lobby?</h3>
+      <ul>
+        <li><strong>Host</strong> tworzy pokój i przekazuje jego kod pozostałym graczom.</li>
+        <li>Pozostali gracze wpisują swoje imię oraz <strong>kod pokoju</strong>, aby dołączyć.</li>
+        <li>Po wejściu do pokoju wszyscy trafiają do <strong>lobby</strong>, gdzie widać listę graczy i status pokoju.</li>
+        <li>Gdy wszyscy gracze są gotowi, <strong>host uruchamia grę</strong> przyciskiem <strong>"Rozpocznij grę"</strong>.</li>
+        <li>Po uruchomieniu gry status pokoju zmienia się na <strong>active</strong>.</li>
+        <li>Status pokoju oraz lista graczy odświeżają się <strong>automatycznie</strong>.</li>
+        <li>Gdy pokój jest aktywny, gracze mogą kliknąć <strong>"Przejdź do gry"</strong>.</li>
+      </ul>
+
+      <h3>Co robią przyciski?</h3>
+      <ul>
+        <li><strong>Rozpocznij grę</strong> – uruchamia rozgrywkę; ten przycisk widzi tylko host.</li>
+        <li><strong>Przejdź do gry</strong> – otwiera planszę gry, gdy pokój ma status <strong>active</strong>.</li>
+        <li><strong>Wróć do ekranu startowego</strong> – wraca do strony głównej aplikacji.</li>
+      </ul>
+
+      <h3>Co po grze?</h3>
+      <ul>
+        <li>Po zakończeniu rozgrywki pokój otrzymuje status <strong>finished</strong>.</li>
+        <li>W lobby pozostaje widoczna <strong>lista graczy i ranking</strong>.</li>
+        <li>Zwycięzca jest oznaczony <strong>koroną 👑</strong>.</li>
+        <li>Jeśli gra została zakończona, ranking jest już ostateczny.</li>
+      </ul>
+    </div>
   </div>
 
   <div id="gameScreen" class="hidden">
     <div class="card">
-      <h2>Ekran gry</h2>
-      <p><strong>Kod pokoju:</strong> <code id="gameRoomCode"></code></p>
-      <p><strong>Gracz:</strong> <span id="gamePlayerName"></span></p>
+      <div class="hidden">
+  <h2>Ekran gry</h2>
+  <p><strong>Kod pokoju:</strong> <code id="gameRoomCode"></code></p>
+  <p><strong>Gracz:</strong> <span id="gamePlayerName"></span></p>
+</div>
+<div id="gameBoard" class="board">
+  <div class="row">
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+  </div>
+  <div class="row">
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+  </div>
+  <div class="row">
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+  </div>
+  <div class="row">
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+  </div>
+  <div class="row">
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+  </div>
+  <div class="row">
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+    <div class="tile"></div>
+  </div>
+</div>
 
-      <label for="guessInput">Wpisz 5-literowe słowo</label>
-      <input id="guessInput" type="text" maxlength="5" placeholder="Np. BARAN" />
+      <div class="hidden">
+  <label for="guessInput">Wpisz 5-literowe słowo</label>
+  <input id="guessInput" type="text" maxlength="5" placeholder="Np. BARAN" />
+</div>
 
-      <button id="submitGuessBtn">Wyślij próbę</button>
-      <button id="backToLobbyBtn" class="secondary-btn">Wróć do lobby</button>
+<button id="submitGuessBtn" class="hidden">Wyślij próbę</button>
+	  <button id="backToLobbyBtn" class="secondary-btn hidden">Wróć do lobby</button>
+      
+	  <div id="keyboard" class="keyboard">
+  <div class="key-row">
+    <button class="key" data-key="Ą">Ą</button>
+    <button class="key" data-key="Ć">Ć</button>
+    <button class="key" data-key="Ę">Ę</button>
+    <button class="key" data-key="Ł">Ł</button>
+    <button class="key" data-key="Ó">Ó</button>
+    <button class="key" data-key="Ś">Ś</button>
+    <button class="key" data-key="Ń">Ń</button>
+    <button class="key" data-key="Ż">Ż</button>
+    <button class="key" data-key="Ź">Ź</button>
+  </div>
+  <div class="key-row">
+    <button class="key" data-key="Q">Q</button>
+    <button class="key" data-key="W">W</button>
+    <button class="key" data-key="E">E</button>
+    <button class="key" data-key="R">R</button>
+    <button class="key" data-key="T">T</button>
+    <button class="key" data-key="Y">Y</button>
+    <button class="key" data-key="U">U</button>
+    <button class="key" data-key="I">I</button>
+    <button class="key" data-key="O">O</button>
+    <button class="key" data-key="P">P</button>
+  </div>
+  <div class="key-row">
+    <button class="key" data-key="A">A</button>
+    <button class="key" data-key="S">S</button>
+    <button class="key" data-key="D">D</button>
+    <button class="key" data-key="F">F</button>
+    <button class="key" data-key="G">G</button>
+    <button class="key" data-key="H">H</button>
+    <button class="key" data-key="J">J</button>
+    <button class="key" data-key="K">K</button>
+    <button class="key" data-key="L">L</button>
+  </div>
+  <div class="key-row">
+    <button class="key wide" data-key="ENTER">ENTER</button>
+    <button class="key" data-key="Z">Z</button>
+    <button class="key" data-key="X">X</button>
+    <button class="key" data-key="C">C</button>
+    <button class="key" data-key="V">V</button>
+    <button class="key" data-key="B">B</button>
+    <button class="key" data-key="N">N</button>
+    <button class="key" data-key="M">M</button>
+    <button class="key wide" data-key="BACKSPACE">⌫</button>
+  </div>
+</div>
 
       <div id="gameMessage"></div>
 
-      <h3>Twoje zapisane próby</h3>
-      <ul id="guessesList"></ul>
+      <div id="guessesList" class="hidden"></div>
     </div>
   </div>
+
+<div id="helpModal" class="modal-overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <h2 id="helpTitle">Jak grać?</h2>
+    <p>Masz 6 prób, aby odgadnąć ukryte 5-literowe słowo.</p>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-box correct"></div>
+        <div><strong>Zielony</strong> – litera jest na właściwym miejscu</div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box present"></div>
+        <div><strong>Żółty</strong> – litera jest w haśle, ale na innym miejscu</div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box absent"></div>
+        <div><strong>Szary</strong> – tej litery nie ma w haśle</div>
+      </div>
+    </div>
+
+        <ul>
+      <li>Wszyscy gracze w pokoju zgadują to samo 5-literowe hasło.</li>
+      <li>Słowa wpisujesz na planszy – działa klawiatura fizyczna oraz ekranowa.</li>
+      <li>Masz 6 prób. Po odgadnięciu hasła lub po 6. próbie gra się kończy.</li>
+      <li>Wygrywa gracz z <strong>najmniejszą liczbą prób</strong>. Przy remisie decyduje czas!</li>
+      <li>Po zakończeniu gry <strong>wróć do lobby</strong>, aby sprawdzić ranking i zobaczyć, kto zdobył koronę 👑.</li>
+    </ul>
+
+        <div class="modal-actions">
+      <button id="closeHelpBtn">Rozumiem</button>
+    </div>
+  </div>
+</div>
+
+<div id="endGameModal" class="modal-overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="endGameTitle">
+    <h2 id="endGameTitle">Koniec gry!</h2>
+    <div id="endGameContent" style="margin-bottom: 20px; text-align: center; font-size: 18px;">
+      <!-- Tutaj za pomocą JavaScript wstawimy wynik, czas i hasło -->
+    </div>
+    <div class="modal-actions">
+      <button id="endGameBackToLobbyBtn">Wróć do lobby</button>
+    </div>
+  </div>
+</div>
 
   <script type="module">
     import { createClient } from 'https://esm.sh/@supabase/supabase-js'
@@ -205,10 +649,12 @@
       "BREJA","CZAPA","GNIEW","LILIA","PŁUCA","SIDŁO","STRUG","ŻARNA","WRĘGA","GRAPA"
     ].filter(w => w.length === 5);
 
-    let currentRoom = null;
+        let currentRoom = null;
     let currentPlayerName = '';
     let currentIsHost = false;
     let currentPlayer = null;
+    let liveGuess = '';
+    let lobbyInterval = null; // --- ZMIANA: Zmienna trzymająca automatyczne odświeżanie ---
 	
 	function saveSession() {
   localStorage.setItem('retro_currentRoom', JSON.stringify(currentRoom));
@@ -280,6 +726,10 @@ function restoreSession() {
     const backToLobbyBtn = document.getElementById('backToLobbyBtn');
     const gameMessageEl = document.getElementById('gameMessage');
     const guessesListEl = document.getElementById('guessesList');
+	
+	const helpBtn = document.getElementById('helpBtn');
+const helpModal = document.getElementById('helpModal');
+const closeHelpBtn = document.getElementById('closeHelpBtn');
 
     function showMessage(element, text, type = 'error') {
       element.className = type;
@@ -337,7 +787,7 @@ function restoreSession() {
       }
     }
 
-    function showLobby(room, playerName, isHost = false, player = null) {
+            function showLobby(room, playerName, isHost = false, player = null) {
       currentRoom = room;
       currentPlayerName = playerName;
       currentIsHost = isHost;
@@ -353,30 +803,52 @@ function restoreSession() {
 
       renderHostControls();
       renderGoToGameButton();
-	  saveSession();
+      saveSession();
       loadPlayers();
+
+      // --- ZMIANA: Uruchomienie automatycznego odświeżania (co 3 sekundy) ---
+      if (lobbyInterval) clearInterval(lobbyInterval);
+      lobbyInterval = setInterval(() => {
+        refreshRoomStatus();
+        loadPlayers();
+      }, 3000);
+      // --- KONIEC ZMIANY ---
     }
 
     function showGame() {
-      if (!currentRoom || !currentPlayer) return;
+  if (!currentRoom || !currentPlayer) return;
 
-      lobbyScreen.classList.add('hidden');
-      gameScreen.classList.remove('hidden');
+  // --- ZMIANA: Zatrzymanie odświeżania ---
+  if (lobbyInterval) {
+    clearInterval(lobbyInterval);
+    lobbyInterval = null;
+  }
+  // --- KONIEC ZMIANY ---
 
-      gameRoomCodeEl.textContent = currentRoom.code;
-      gamePlayerNameEl.textContent = currentPlayerName;
-      guessInput.value = '';
+  lobbyScreen.classList.add('hidden');
+  gameScreen.classList.remove('hidden');
 
-      saveSession();
-	  loadMyGuesses();
-    }
+  gameRoomCodeEl.textContent = currentRoom.code;
+  gamePlayerNameEl.textContent = currentPlayerName;
+  liveGuess = '';
+
+  saveSession();
+  loadMyGuesses();
+}
 
     function showHome() {
       currentRoom = null;
       currentPlayerName = '';
       currentIsHost = false;
       currentPlayer = null;
-	  clearSession();
+      clearSession();
+
+      // --- ZMIANA: Zatrzymanie odświeżania ---
+      if (lobbyInterval) {
+        clearInterval(lobbyInterval);
+        lobbyInterval = null;
+      }
+      // --- KONIEC ZMIANY ---
 
       lobbyScreen.classList.add('hidden');
       gameScreen.classList.add('hidden');
@@ -488,40 +960,209 @@ async function loadPlayers() {
   }
 }
 
-    async function loadMyGuesses() {
-if (!currentPlayer) return;
+function setVirtualKeyState(letter, state) {
+  const priority = { absent: 1, present: 2, correct: 3 };
 
-guessesListEl.innerHTML = '<li>Ładowanie...</li>';
+  document.querySelectorAll(`.key[data-key="${letter}"]`).forEach(key => {
+    const currentState =
+      key.classList.contains('correct') ? 'correct' :
+      key.classList.contains('present') ? 'present' :
+      key.classList.contains('absent') ? 'absent' :
+      null;
 
-      try {
-        const { data, error } = await supabase
-          .from('guesses')
-          .select('*')
-          .eq('player_id', currentPlayer.id)
-          .order('attempt_number', { ascending: true });
+    if (!currentState || priority[state] > priority[currentState]) {
+      key.classList.remove('correct', 'present', 'absent');
+      key.classList.add(state);
+    }
+  });
+}
 
-        if (error) throw error;
+function evaluateGuess(guess, secret) {
+  const result = Array(5).fill('absent');
+  const secretArr = secret.split('');
+  const guessArr = guess.split('');
 
-        if (!data || data.length === 0) {
-          guessesListEl.innerHTML = '<li>Brak prób.</li>';
-          return;
+  for (let i = 0; i < 5; i++) {
+    if (guessArr[i] === secretArr[i]) {
+      result[i] = 'correct';
+      secretArr[i] = null;
+      guessArr[i] = null;
+    }
+  }
+
+  for (let i = 0; i < 5; i++) {
+    if (guessArr[i] === null) continue;
+    const idx = secretArr.indexOf(guessArr[i]);
+    if (idx !== -1) {
+      result[i] = 'present';
+      secretArr[idx] = null;
+    }
+  }
+
+  return result;
+}
+
+function renderGuessesOnBoard(guesses, skipLastRow = false) {
+  const board = document.getElementById('gameBoard');
+  if (!board || !currentRoom) return;
+
+  document.querySelectorAll('.key').forEach(key => {
+    key.classList.remove('correct', 'present', 'absent');
+  });
+
+  const rows = board.querySelectorAll('.row');
+  const secretWord = (currentRoom.secret_word || '').trim().toUpperCase();
+
+  rows.forEach((row, rowIndex) => {
+    const tiles = row.querySelectorAll('.tile');
+    const isLastGuessRow = skipLastRow && rowIndex === guesses.length - 1;
+    const guess = isLastGuessRow ? '' : (guesses[rowIndex]?.guess_word || '');
+    const evaluation = guess ? evaluateGuess(guess, secretWord) : [];
+
+    tiles.forEach((tile, colIndex) => {
+      const letter = guess[colIndex] || '';
+      tile.textContent = letter;
+      tile.classList.remove('correct', 'present', 'absent', 'flip');
+
+      if (evaluation[colIndex]) {
+        tile.classList.add(evaluation[colIndex]);
+        if (letter) {
+          setVirtualKeyState(letter, evaluation[colIndex]);
         }
+      }
+    });
+  });
+}
 
-        guessesListEl.innerHTML = data
-          .map(guess => `<li>Próba ${guess.attempt_number}: ${guess.guess_word}</li>`)
-          .join('');
-      } catch (error) {
-        guessesListEl.innerHTML = '';
-        showMessage(gameMessageEl, `Błąd: ${error.message}`);
+function renderLiveGuess() {
+  const board = document.getElementById('gameBoard');
+  if (!board) return;
+
+  const rows = board.querySelectorAll('.row');
+  const guessCount = guessesListEl.dataset.guessCount ? Number(guessesListEl.dataset.guessCount) : 0;
+
+  if (guessCount >= 6) return;
+
+  const activeRow = rows[guessCount];
+  if (!activeRow) return;
+
+  const tiles = activeRow.querySelectorAll('.tile');
+
+  tiles.forEach((tile, index) => {
+    tile.textContent = liveGuess[index] || '';
+    tile.classList.remove('correct', 'present', 'absent');
+  });
+}
+
+async function animateLastGuessRow(guessWord, attemptNumber) {
+  const board = document.getElementById('gameBoard');
+  if (!board || !currentRoom) return;
+
+  const rows = board.querySelectorAll('.row');
+  const rowIndex = attemptNumber - 1;
+
+  if (rowIndex < 0) return;
+
+  const row = rows[rowIndex];
+  if (!row) return;
+
+  const secretWord = (currentRoom.secret_word || '').trim().toUpperCase();
+  const evaluation = evaluateGuess(guessWord, secretWord);
+  const tiles = row.querySelectorAll('.tile');
+
+  for (let i = 0; i < tiles.length; i++) {
+    const tile = tiles[i];
+    const letter = guessWord[i] || '';
+
+    tile.textContent = letter;
+    tile.classList.remove('correct', 'present', 'absent', 'flip');
+
+    void tile.offsetWidth;
+    tile.classList.add('flip');
+
+    await new Promise(resolve => setTimeout(resolve, 140));
+
+    if (evaluation[i]) {
+      tile.classList.add(evaluation[i]);
+      if (letter) {
+        setVirtualKeyState(letter, evaluation[i]);
       }
     }
+
+    await new Promise(resolve => setTimeout(resolve, 90));
+
+    tile.classList.remove('flip');
+  }
+}
+
+async function loadMyGuesses(skipLastRow = false) {
+  if (!currentPlayer) return [];
+
+  guessesListEl.innerHTML = '<li>Ładowanie...</li>';
+
+  try {
+    const { data, error } = await supabase
+      .from('guesses')
+      .select('*')
+      .eq('player_id', currentPlayer.id)
+      .order('attempt_number', { ascending: true });
+
+    if (error) throw error;
+
+    const guesses = data || [];
+
+    guessesListEl.dataset.guessCount = guesses.length;
+    renderGuessesOnBoard(guesses, skipLastRow);
+    renderLiveGuess();
+
+    if (guesses.length === 0) {
+      guessesListEl.innerHTML = '<li>Brak prób.</li>';
+      return guesses;
+    }
+
+    guessesListEl.innerHTML = guesses
+      .map(guess => `<li>Próba ${guess.attempt_number}: ${guess.guess_word}</li>`)
+      .join('');
+
+    return guesses;
+  } catch (error) {
+    guessesListEl.innerHTML = '';
+    showMessage(gameMessageEl, `Błąd: ${error.message}`);
+    return [];
+  }
+}
+
+function handleGameKeyboard(event) {
+  if (gameScreen.classList.contains('hidden')) return;
+  if (!currentRoom || !currentPlayer) return;
+  
+  console.log('KEYDOWN:', event.key);
+
+  const key = event.key.toUpperCase();
+
+  if (key === 'ENTER') {
+    submitGuess();
+    return;
+  }
+
+  if (key === 'BACKSPACE') {
+    liveGuess = liveGuess.slice(0, -1);
+    renderLiveGuess();
+    return;
+  }
+
+  if (/^[A-ZĄĆĘŁŃÓŚŻŹ]$/.test(key) && liveGuess.length < 5) {
+    liveGuess += key;
+    renderLiveGuess();
+  }
+}
 
 async function submitGuess() {
   if (!currentRoom || !currentPlayer) return;
 
   clearMessage(gameMessageEl);
 
-  const guessWord = guessInput.value.trim().toUpperCase();
+const guessWord = liveGuess.trim().toUpperCase();
 
   if (!guessWord) {
     showMessage(gameMessageEl, 'Wpisz słowo.');
@@ -530,11 +1171,6 @@ async function submitGuess() {
 
   if (guessWord.length !== 5) {
     showMessage(gameMessageEl, 'Słowo musi mieć 5 liter.');
-    return;
-  }
-
-  if (!WORDS.includes(guessWord)) {
-    showMessage(gameMessageEl, 'To słowo nie jest na liście haseł.');
     return;
   }
 
@@ -627,7 +1263,7 @@ async function submitGuess() {
 
       if (winnersError) throw winnersError;
 
-      if (winners && winners.length > 0) {
+            if (winners && winners.length > 0) {
         const winnerId = winners[0].id;
 
         const { error: resetWinnersError } = await supabase
@@ -645,7 +1281,25 @@ async function submitGuess() {
         if (setWinnerError) throw setWinnerError;
       }
 
-      gameMessageEl.innerHTML = `<div class="success">Brawo! Odgadłeś hasło w ${attemptNumber} próbach. Hasło: ${secretWordNormalized}</div>`;
+      // --- ZMIANA: Obliczanie czasu i nowy modal (WYGRANA) ---
+      let timeText = "nieznanym";
+      if (currentRoom.started_at) {
+        const timeDiff = new Date(now).getTime() - new Date(currentRoom.started_at).getTime();
+        const seconds = Math.floor((timeDiff / 1000) % 60);
+        const minutes = Math.floor(timeDiff / (1000 * 60));
+        timeText = minutes > 0 ? `${minutes} min ${seconds} s` : `${seconds} s`;
+      }
+      
+      document.getElementById('endGameTitle').textContent = "Brawo, wygrywasz! 🎉";
+      document.getElementById('endGameContent').innerHTML = `
+        <p>Odgadłeś hasło <strong>${secretWordNormalized}</strong>!</p>
+        <p>Liczba prób: <strong>${attemptNumber}</strong></p>
+        <p>Twój czas: <strong>${timeText}</strong></p>
+      `;
+      document.getElementById('endGameModal').classList.add('open');
+      document.getElementById('endGameModal').setAttribute('aria-hidden', 'false');
+      // --- KONIEC ZMIANY ---
+
     } else if (attemptNumber === 6) {
       const now = new Date().toISOString();
 
@@ -664,11 +1318,16 @@ async function submitGuess() {
 
       currentPlayer = updatedPlayer;
 
-      showMessage(
-        gameMessageEl,
-        `To była 6 próba. Nie udało się odgadnąć hasła.`,
-        'error'
-      );
+      // --- ZMIANA: Nowy modal (PRZEGRANA) ---
+      document.getElementById('endGameTitle').textContent = "Koniec gry!";
+      document.getElementById('endGameContent').innerHTML = `
+        <p>Niestety, nie udało się odgadnąć w 6 próbach 😢</p>
+        <p>Prawidłowe hasło to: <strong>${secretWordNormalized}</strong></p>
+      `;
+      document.getElementById('endGameModal').classList.add('open');
+      document.getElementById('endGameModal').setAttribute('aria-hidden', 'false');
+      // --- KONIEC ZMIANY ---
+
     } else {
       showMessage(
         gameMessageEl,
@@ -702,8 +1361,9 @@ async function submitGuess() {
       currentRoom = updatedRoom;
     }
 
-    guessInput.value = '';
-    loadMyGuesses();
+    liveGuess = '';
+await loadMyGuesses(true);
+await animateLastGuessRow(guessWord, attemptNumber);
   } catch (error) {
     showMessage(gameMessageEl, `Błąd: ${error.message}`);
   } finally {
@@ -864,11 +1524,68 @@ async function submitGuess() {
     backBtn.addEventListener('click', showHome);
     startGameBtn.addEventListener('click', startGame);
     goToGameBtn.addEventListener('click', showGame);
-    submitGuessBtn.addEventListener('click', submitGuess);
+        submitGuessBtn.addEventListener('click', submitGuess);
     backToLobbyBtn.addEventListener('click', () => showLobby(currentRoom, currentPlayerName, currentIsHost, currentPlayer));
-	if (restoreSession()) {
+    
+    // --- ZMIANA: Przycisk powrotu w nowym modalu ---
+    document.getElementById('endGameBackToLobbyBtn').addEventListener('click', () => {
+      document.getElementById('endGameModal').classList.remove('open');
+      document.getElementById('endGameModal').setAttribute('aria-hidden', 'true');
+      showLobby(currentRoom, currentPlayerName, currentIsHost, currentPlayer);
+    });
+    // --- KONIEC ZMIANY ---
+
+    document.addEventListener('keydown', handleGameKeyboard);
+	document.querySelectorAll('.key').forEach(btn => {
+  btn.addEventListener('click', () => {
+    handleVirtualKey(btn.dataset.key);
+  });
+});
+	
+if (restoreSession()) {
   showLobby(currentRoom, currentPlayerName, currentIsHost, currentPlayer);
 }
+
+helpBtn.addEventListener('click', openHelpModal);
+closeHelpBtn.addEventListener('click', closeHelpModal);
+helpModal.addEventListener('click', (e) => {
+  if (e.target === helpModal) closeHelpModal();
+});
+
+function openHelpModal() {
+  helpModal.classList.add('open');
+  helpModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeHelpModal() {
+  helpModal.classList.remove('open');
+  helpModal.setAttribute('aria-hidden', 'true');
+}
+function handleVirtualKey(key) {
+console.log('VIRTUAL KEY:', key);
+
+  if (gameScreen.classList.contains('hidden')) return;
+  if (!currentRoom || !currentPlayer) return;
+
+  if (key === 'ENTER') {
+    submitGuess();
+    return;
+  }
+
+  if (key === 'BACKSPACE') {
+    liveGuess = liveGuess.slice(0, -1);
+    renderLiveGuess();
+    return;
+  }
+
+  if (/^[A-ZĄĆĘŁŃÓŚŻŹ]$/.test(key) && liveGuess.length < 5) {
+    liveGuess += key;
+    renderLiveGuess();
+  }
+}
   </script>
+
+
+
 </body>
 </html>
