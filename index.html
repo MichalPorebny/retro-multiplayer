@@ -532,10 +532,8 @@
   </div>
 </div>
 
-      <div class="hidden">
-  <label for="guessInput">Wpisz 5-literowe słowo</label>
-  <input id="guessInput" type="text" maxlength="5" placeholder="Np. BARAN" />
-</div>
+            <!-- Niewidoczne pole wywołujące klawiaturę smartfona -->
+  <input id="mobileInput" type="text" style="opacity: 0; position: absolute; z-index: -1; width: 1px; height: 1px;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
 
 <button id="submitGuessBtn" class="hidden">Wyślij próbę</button>
 	  <button id="backToLobbyBtn" class="secondary-btn hidden">Wróć do lobby</button>
@@ -736,7 +734,7 @@ function restoreSession() {
 
     const gameRoomCodeEl = document.getElementById('gameRoomCode');
     const gamePlayerNameEl = document.getElementById('gamePlayerName');
-    const guessInput = document.getElementById('guessInput');
+    const mobileInput = document.getElementById('mobileInput');
     const submitGuessBtn = document.getElementById('submitGuessBtn');
     const backToLobbyBtn = document.getElementById('backToLobbyBtn');
     const gameMessageEl = document.getElementById('gameMessage');
@@ -1569,11 +1567,35 @@ await animateLastGuessRow(guessWord, attemptNumber);
     // --- KONIEC ZMIANY ---
 
     document.addEventListener('keydown', handleGameKeyboard);
-	document.querySelectorAll('.key').forEach(btn => {
+    document.querySelectorAll('.key').forEach(btn => {
   btn.addEventListener('click', () => {
     handleVirtualKey(btn.dataset.key);
   });
 });
+
+// --- ZMIANA: Obsługa natywnej klawiatury na telefonach ---
+document.getElementById('gameBoard').addEventListener('click', () => {
+  if (!gameScreen.classList.contains('hidden')) {
+    mobileInput.value = liveGuess;
+    mobileInput.focus();
+  }
+});
+
+mobileInput.addEventListener('input', (e) => {
+  let val = e.target.value.toUpperCase().replace(/[^A-ZĄĆĘŁŃÓŚŻŹ]/g, '');
+  if (val.length > 5) val = val.slice(0, 5);
+  liveGuess = val;
+  e.target.value = liveGuess;
+  renderLiveGuess();
+});
+
+mobileInput.addEventListener('keydown', (e) => {
+  e.stopPropagation(); // Zapobiega konfliktom z klawiaturą komputerową
+  if (e.key === 'Enter' || e.key === 'Go') {
+    submitGuess();
+  }
+});
+// --- KONIEC ZMIANY ---
 	
 if (restoreSession()) {
   showLobby(currentRoom, currentPlayerName, currentIsHost, currentPlayer);
