@@ -1310,6 +1310,9 @@ const guessWord = liveGuess.trim().toUpperCase();
       
       document.getElementById('endGameTitle').textContent = "Udało się! 🎉";
       document.getElementById('endGameContent').innerHTML = `
+        <div style="text-align: center; margin-bottom: 15px;">
+          <img src="duck_champagne_5.png" alt="Kaczka z szampanem" style="height: 120px;" />
+        </div>
         <p>Odgadłeś hasło <strong>${secretWordNormalized}</strong>!</p>
         <p>Liczba prób: <strong>${attemptNumber}</strong></p>
         <p>Twój czas: <strong>${timeText}</strong></p>
