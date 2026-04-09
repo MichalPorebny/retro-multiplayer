@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Uniteralnie 🦆</title>
   <style>
       body {
@@ -42,13 +42,15 @@
       width: 100%;
       padding: 12px;
       border-radius: 8px;
-      border: 1px solid #555;
-      background: #222;
-      color: white;
+      border: 1px solid #ccc;
+      background: #ffffff;
+      color: #181716;
       margin-bottom: 16px;
+      font-size: 16px; /* ZMIANA: Zapobiega auto-zoomowi na iOS */
+      box-sizing: border-box; /* ZMIANA: Naprawia szerokość pól tekstowych */
     }
 
-        button {
+    button {
       padding: 12px 16px;
       border: none;
       border-radius: 8px;
@@ -58,6 +60,7 @@
       cursor: pointer;
       margin-right: 8px;
       margin-bottom: 8px;
+      touch-action: manipulation; /* ZMIANA: Szybkie klikanie bez przybliżania ekranu */
     }
 
         .secondary-btn {
@@ -131,7 +134,11 @@
       color: #181716;
     }
 
-    @media (max-width: 720px) {
+        @media (max-width: 720px) {
+      body {
+        margin: 10px auto;
+        padding: 12px;
+      }
       .grid {
         grid-template-columns: 1fr;
       }
@@ -650,6 +657,7 @@
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
     const WORDS = [
+      // TWOJE ORYGINALNE RZECZOWNIKI (100)
       "BLASK","BARAN","BŁOTO","BURAK","BURZA","CEGŁA","CHATA","CHLEB","DESKA","DZWON",
       "GŁOWA","GROCH","ISKRA","JAJKO","KAMYK","KARTA","KASZA","KLUCZ","KREDA","KRZAK",
       "LAMPA","MASKA","MISKA","MUCHA","PALMA","PALEC","PASEK","PLAMA","POMOC","POTOK",
@@ -659,7 +667,38 @@
       "SFORA","STRÓJ","ŚRODA","TKACZ","WANNA","WĄTEK","WRZOS","ZAJĄC","ZORZA","ŁAWKA",
       "ŁYŻKA","JUCHA","NĘDZA","WYDRA","SUTEK","BĘBEN","BRONA","DYMEK","GAŁĄŹ","GĄSKA",
       "GWARA","KŁODA","KROWA","NORKA","OWIES","PUCHA","SZEPT","ZBOŻE","MIEDŹ","ROWEK",
-      "BREJA","CZAPA","GNIEW","LILIA","PŁUCA","SIDŁO","STRUG","ŻARNA","WRĘGA","GRAPA"
+      "BREJA","CZAPA","GNIEW","LILIA","PŁUCA","SIDŁO","STRUG","ŻARNA","WRĘGA","GRAPA",
+      
+      // CZASOWNIKI (100)
+      "BADAĆ","BAWIĆ","BEKAĆ","BUJAĆ","BYWAĆ","COFAĆ","DAWAĆ","DĄSAĆ","DĄŻYĆ","DODAĆ",
+      "DOLAĆ","DRZEĆ","DRWIĆ","DUSIĆ","DYMAĆ","GADAĆ","GAPIĆ","GASIĆ","GINĄĆ","GOLIĆ",
+      "GONIĆ","GUBIĆ","IGRAĆ","JADAĆ","KAZAĆ","KĄPAĆ","KOPAĆ","KOSIĆ","KROIĆ","KUKAĆ",
+      "KUPIĆ","KUSIĆ","LATAĆ","LEPIĆ","LIZAĆ","LUBIĆ","ŁAPAĆ","ŁASIĆ","ŁATAĆ","ŁOWIĆ",
+      "ŁUPIĆ","MACAĆ","MAMIĆ","MAZAĆ","MIJAĆ","MINĄĆ","MOTAĆ","MÓWIĆ","MRZEĆ","MYLIĆ",
+      "NADAĆ","NALAĆ","NĘCIĆ","NOSIĆ","OBJĄĆ","OBIEC","OBMYĆ","ODDAĆ","ODKUĆ","OPIEC",
+      "ORZEC","OPAŚĆ","OTRUĆ","OWIAĆ","PADAĆ","PALIĆ","PĘKAĆ","PIJAĆ","PIKAĆ","PISAĆ",
+      "POCIĆ","PODAĆ","POLAĆ","PUKAĆ","PYTAĆ","RANIĆ","RAZIĆ","RĄBAĆ","ROBIĆ","RONIĆ",
+      "SIKAĆ","SKRYĆ","SOLIĆ","SPAŚĆ","SUNĄĆ","SYKAĆ","SYPAĆ","TOPIĆ","TONĄĆ","TRWAĆ",
+      "TRZEĆ","TUPAĆ","TYKAĆ","UBIEC","UCZYĆ","UGIĄĆ","UKRYĆ","UPAŚĆ","UPIEC","WABIĆ",
+
+      // PRZYSŁÓWKI (50)
+      "BŁAHO","BLADO","BOSKO","CHORO","CHYŻO","CICHO","CZULE","DŁUGO","DROGO","DZIKO",
+      "GĘSTO","GRUBO","JASNO","JUTRO","LEKKO","ŁATWO","MĘTNO","MNIEJ","MOCNO","MOKRO",
+      "NADAL","NAGLE","NIECO","NIGDY","NISKO","NUDNO","OSTRO","PEŁNO","PEWNO","POTEM",
+      "PUSTO","RÓWNO","SKĄPO","SŁABO","SŁONO","SPORO","SROGO","STALE","SUCHO","SZARO",
+      "ŚLEPO","TANIO","TERAZ","TYŁEM","WĄSKO","WCALE","WOLNO","ZARAZ","ZNOWU","ŻÓŁTO",
+
+      // PRZYMIOTNIKI (100)
+      "BIAŁY","BLADY","BŁAHY","BŁOGI","BOSKI","BUTNY","CELNY","CHORY","CHUDY","CHYŻY",
+      "CICHY","CZUŁY","DŁUGI","DOBRY","DOLNY","DROGI","DUMNY","DZIKI","FAJNY","GĘSTY",
+      "GIBKI","GŁUPI","GODNY","GÓRNY","GRUBY","HOJNY","JASNY","KORNY","KRĘPY","KRYTY",
+      "LEPKI","LETNI","LICHY","LOTNY","ŁATWY","ŁZAWY","MĄDRY","MĘTNY","MŁODY","MODNY",
+      "MOKRY","NIEMY","NUDNY","OBYTY","OSTRY","OTYŁY","PALNY","PARNY","PEŁNY","PEWNY",
+      "PITNY","PIWNY","PŁOWY","POLNY","PÓŹNY","PRAWY","PRUTY","PSTRY","PUSTY","RANNY",
+      "RĄCZY","RODNY","ROSŁY","RÓWNY","SENNY","SETNY","SILNY","SKĄPY","SKORY","SŁABY",
+      "SŁONY","SNUTY","SOLNY","SPORY","SROGI","STARY","SUCHY","SYPKI","SZARY","ŚLEPY",
+      "TAJNY","TRUTY","UBOGI","UDANY","UMYTY","WARTY","WĄSKI","WINNY","WODNY","WOLNY",
+      "ZBITY","ZIMNY","ZNANY","ZRYTY","ZŁOTY","ŻĄDNY","ŻÓŁTY","ŻYTNI","JASNY","DROGI"
     ].filter(w => w.length === 5);
 
         let currentRoom = null;
