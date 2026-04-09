@@ -2,16 +2,16 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Retro Multiplayer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uniteralnie 🦆</title>
   <style>
-    body {
+      body {
       font-family: Arial, sans-serif;
       max-width: 900px;
       margin: 40px auto;
       padding: 20px;
-      background: #121213;
-      color: white;
+      background: #ffffff; /* ZMIANA: Białe tło */
+      color: #181716; /* ZMIANA: Czarny tekst Univio */
     }
 
     h1, h2, h3 {
@@ -25,10 +25,10 @@
     }
 
     .card {
-      background: #1a1a1b;
+      background: #f8f8f8; /* ZMIANA: Jasne tło kart */
       padding: 20px;
       border-radius: 12px;
-      border: 1px solid #333;
+      border: 1px solid #dddddd; /* ZMIANA: Jasna ramka */
       margin-bottom: 20px;
     }
 
@@ -48,11 +48,11 @@
       margin-bottom: 16px;
     }
 
-    button {
+        button {
       padding: 12px 16px;
       border: none;
       border-radius: 8px;
-      background: #538d4e;
+      background: #ff7800; /* ZMIANA: Pomarańczowy Univio */
       color: white;
       font-weight: bold;
       cursor: pointer;
@@ -60,9 +60,9 @@
       margin-bottom: 8px;
     }
 
-    .secondary-btn {
-      background: #3a3a3c;
-    }
+        .secondary-btn {
+      background: #54286a; /* ZMIANA: Fioletowy Univio */
+    }}
 
     .error {
       color: #ff7b7b;
@@ -79,7 +79,8 @@
     }
 
     code {
-      background: #333;
+      background: #e9ecef;
+      color: #181716;
       padding: 2px 6px;
       border-radius: 4px;
     }
@@ -104,8 +105,8 @@
     }
 	
 	    .lobby-help-card {
-      background: #18181a;
-      border-color: #3a3a3c;
+      background: #f8f8f8;
+      border-color: #dddddd;
     }
 
     .lobby-help-card h2 {
@@ -115,7 +116,7 @@
     .lobby-help-card h3 {
       margin-top: 20px;
       margin-bottom: 10px;
-      color: #d7dadc;
+      color: #181716;
       font-size: 18px;
     }
 
@@ -127,7 +128,7 @@
     .lobby-help-card li {
       margin-bottom: 10px;
       line-height: 1.5;
-      color: #d7dadc;
+      color: #181716;
     }
 
     @media (max-width: 720px) {
@@ -178,13 +179,13 @@
 }
 
 .modal {
-  background: #1a1a1b;
+  background: #ffffff;
   width: 100%;
   max-width: 420px;
   border-radius: 14px;
   padding: 20px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
-  border: 1px solid #2f2f31;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  border: 1px solid #dddddd;
 }
 
 .modal h2 {
@@ -196,7 +197,7 @@
 
 .modal p, .modal li {
   line-height: 1.5;
-  color: #d7dadc;
+  color: #181716;
 }
 
 .modal ul {
@@ -382,8 +383,11 @@
 </head>
 <body>
 <div class="top-bar">
-  <h1>Retro Multiplayer</h1>
-  <button class="icon-btn" id="helpBtn" aria-label="Instrukcja gry">?</button>
+  <div style="display: flex; align-items: center; gap: 12px;">
+    <img src="univio_sygnet_full%20colour.png" alt="Univio Logo" style="height: 42px;" />
+    <h1 style="margin: 0;">Uniteralnie</h1>
+  </div>
+  <button id="helpBtn" class="secondary-btn">Instrukcja gry</button>
 </div>
 
   <div id="homeScreen" class="grid">
@@ -408,10 +412,40 @@
       <label for="roomCode">Kod pokoju</label>
       <input id="roomCode" type="text" placeholder="Np. ABC123" />
 
-      <button id="joinRoomBtn">Dołącz do pokoju</button>
+            <button id="joinRoomBtn">Dołącz do pokoju</button>
 
       <div id="joinMessage"></div>
       <div id="joinResult"></div>
+    </div>
+
+    <div class="card lobby-help-card" style="grid-column: 1 / -1;">
+      <h2>Instrukcja gry i lobby</h2>
+
+      <h3>Jak to działa?</h3>
+      <ul>
+        <li><strong>Host</strong> tworzy pokój i przekazuje jego kod pozostałym graczom.</li>
+        <li>Pozostali gracze wpisują swoje imię oraz <strong>kod pokoju</strong>, aby dołączyć.</li>
+        <li>Po wejściu do pokoju wszyscy trafiają do <strong>lobby</strong>, gdzie widać listę graczy i status pokoju.</li>
+        <li>Gdy wszyscy gracze są gotowi, <strong>host uruchamia grę</strong> przyciskiem <strong>"Rozpocznij grę"</strong>.</li>
+        <li>Po uruchomieniu gry status pokoju zmienia się na <strong>active</strong>.</li>
+        <li>Status pokoju oraz lista graczy odświeżają się <strong>automatycznie</strong>.</li>
+        <li>Gdy pokój jest aktywny, gracze mogą kliknąć <strong>"Przejdź do gry"</strong>.</li>
+      </ul>
+
+      <h3>Co robią przyciski w lobby?</h3>
+      <ul>
+        <li><strong>Rozpocznij grę</strong> – uruchamia rozgrywkę; ten przycisk widzi tylko host.</li>
+        <li><strong>Przejdź do gry</strong> – otwiera planszę gry, gdy pokój ma status <strong>active</strong>.</li>
+        <li><strong>Wróć do ekranu startowego</strong> – wraca do strony głównej aplikacji.</li>
+      </ul>
+
+      <h3>Co po grze?</h3>
+      <ul>
+        <li>Po zakończeniu rozgrywki pokój otrzymuje status <strong>finished</strong>.</li>
+        <li>W lobby pozostaje widoczna <strong>lista graczy i ranking</strong>.</li>
+        <li>Zwycięzca jest oznaczony <strong>koroną 👑</strong>.</li>
+        <li>Jeśli gra została zakończona, ranking jest już ostateczny.</li>
+      </ul>
     </div>
   </div>
 
@@ -434,37 +468,7 @@
       <button id="goToGameBtn" class="secondary-btn hidden">Przejdź do gry</button>
       <button id="backBtn" class="secondary-btn">Wróć do ekranu startowego</button>
 
-      <div id="lobbyMessage"></div>
-    </div>
-
-    <div class="card lobby-help-card">
-  <h2>Instrukcja lobby</h2>
-
-      <h3>Jak działa lobby?</h3>
-      <ul>
-        <li><strong>Host</strong> tworzy pokój i przekazuje jego kod pozostałym graczom.</li>
-        <li>Pozostali gracze wpisują swoje imię oraz <strong>kod pokoju</strong>, aby dołączyć.</li>
-        <li>Po wejściu do pokoju wszyscy trafiają do <strong>lobby</strong>, gdzie widać listę graczy i status pokoju.</li>
-        <li>Gdy wszyscy gracze są gotowi, <strong>host uruchamia grę</strong> przyciskiem <strong>"Rozpocznij grę"</strong>.</li>
-        <li>Po uruchomieniu gry status pokoju zmienia się na <strong>active</strong>.</li>
-        <li>Status pokoju oraz lista graczy odświeżają się <strong>automatycznie</strong>.</li>
-        <li>Gdy pokój jest aktywny, gracze mogą kliknąć <strong>"Przejdź do gry"</strong>.</li>
-      </ul>
-
-      <h3>Co robią przyciski?</h3>
-      <ul>
-        <li><strong>Rozpocznij grę</strong> – uruchamia rozgrywkę; ten przycisk widzi tylko host.</li>
-        <li><strong>Przejdź do gry</strong> – otwiera planszę gry, gdy pokój ma status <strong>active</strong>.</li>
-        <li><strong>Wróć do ekranu startowego</strong> – wraca do strony głównej aplikacji.</li>
-      </ul>
-
-      <h3>Co po grze?</h3>
-      <ul>
-        <li>Po zakończeniu rozgrywki pokój otrzymuje status <strong>finished</strong>.</li>
-        <li>W lobby pozostaje widoczna <strong>lista graczy i ranking</strong>.</li>
-        <li>Zwycięzca jest oznaczony <strong>koroną 👑</strong>.</li>
-        <li>Jeśli gra została zakończona, ranking jest już ostateczny.</li>
-      </ul>
+            <div id="lobbyMessage"></div>
     </div>
   </div>
 
@@ -771,12 +775,14 @@ const closeHelpBtn = document.getElementById('closeHelpBtn');
       throw new Error('Nie udało się wygenerować unikalnego kodu pokoju.');
     }
 
-    function renderHostControls() {
-      if (currentIsHost) {
+        function renderHostControls() {
+      // --- ZMIANA: Pokazuj tylko hostowi i tylko wtedy, gdy gra jeszcze nie wystartowała ---
+      if (currentIsHost && currentRoom && currentRoom.status === 'waiting') {
         hostControlsEl.classList.remove('hidden');
       } else {
         hostControlsEl.classList.add('hidden');
       }
+      // --- KONIEC ZMIANY ---
     }
 
     function renderGoToGameButton() {
@@ -785,6 +791,9 @@ const closeHelpBtn = document.getElementById('closeHelpBtn');
       } else {
         goToGameBtn.classList.add('hidden');
       }
+      // --- ZMIANA: Wymuś aktualizację przycisku hosta przy każdej zmianie statusu (np. po starcie) ---
+      renderHostControls();
+      // --- KONIEC ZMIANY ---
     }
 
             function showLobby(room, playerName, isHost = false, player = null) {
@@ -878,8 +887,14 @@ const closeHelpBtn = document.getElementById('closeHelpBtn');
     lobbyStatusEl.textContent = room.status;
     renderGoToGameButton();
 
-    if (room.status === 'finished') {
+        if (room.status === 'finished') {
       showMessage(lobbyMessageEl, 'Gra zakończona. Ranking jest już ostateczny.', 'success');
+      // --- ZMIANA: Zatrzymanie odświeżania po zakończeniu gry ---
+      if (lobbyInterval) {
+        clearInterval(lobbyInterval);
+        lobbyInterval = null;
+      }
+      // --- KONIEC ZMIANY ---
     } else {
       showMessage(lobbyMessageEl, `Status pokoju: ${room.status}`, 'success');
     }
@@ -1281,7 +1296,7 @@ const guessWord = liveGuess.trim().toUpperCase();
         if (setWinnerError) throw setWinnerError;
       }
 
-      // --- ZMIANA: Obliczanie czasu i nowy modal (WYGRANA) ---
+            // --- ZMIANA: Obliczanie czasu i nowy modal (SUKCES) ---
       let timeText = "nieznanym";
       if (currentRoom.started_at) {
         const timeDiff = new Date(now).getTime() - new Date(currentRoom.started_at).getTime();
@@ -1290,11 +1305,12 @@ const guessWord = liveGuess.trim().toUpperCase();
         timeText = minutes > 0 ? `${minutes} min ${seconds} s` : `${seconds} s`;
       }
       
-      document.getElementById('endGameTitle').textContent = "Brawo, wygrywasz! 🎉";
+      document.getElementById('endGameTitle').textContent = "Udało się! 🎉";
       document.getElementById('endGameContent').innerHTML = `
         <p>Odgadłeś hasło <strong>${secretWordNormalized}</strong>!</p>
         <p>Liczba prób: <strong>${attemptNumber}</strong></p>
         <p>Twój czas: <strong>${timeText}</strong></p>
+        <p style="margin-top: 15px; font-size: 16px; color: #a8a8a8;">Wróć do lobby, aby sprawdzić ranking i zobaczyć, czy udało Ci się wygrać! 👑</p>
       `;
       document.getElementById('endGameModal').classList.add('open');
       document.getElementById('endGameModal').setAttribute('aria-hidden', 'false');
