@@ -323,15 +323,23 @@
 }
 
 @media (max-width: 520px) {
-  .key {
-    min-width: 32px;
-    height: 52px;
-    font-size: 13px;
-    padding: 0 6px;
+  .keyboard {
+    gap: 4px;
   }
-
+  .key-row {
+    gap: 4px;
+  }
+  .key {
+    min-width: 0;
+    flex: 1;
+    height: 48px;
+    font-size: 11px;
+    padding: 0;
+  }
   .key.wide {
-    min-width: 62px;
+    min-width: 0;
+    flex: 1.5;
+    font-size: 10px;
   }
 }
 #gameScreen .card {
@@ -1340,9 +1348,12 @@ const guessWord = liveGuess.trim().toUpperCase();
 
       currentPlayer = updatedPlayer;
 
-      // --- ZMIANA: Nowy modal (PRZEGRANA) ---
+            // --- ZMIANA: Nowy modal (PRZEGRANA) ---
       document.getElementById('endGameTitle').textContent = "Koniec gry!";
       document.getElementById('endGameContent').innerHTML = `
+        <div style="text-align: center; margin-bottom: 15px;">
+          <img src="duck_4.png" alt="Kaczka koniec gry" style="height: 120px;" />
+        </div>
         <p>Niestety, nie udało się odgadnąć w 6 próbach 😢</p>
         <p>Prawidłowe hasło to: <strong>${secretWordNormalized}</strong></p>
       `;
