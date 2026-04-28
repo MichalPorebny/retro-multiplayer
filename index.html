@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Uniteralnie 馃</title>
+  <title>Uniteralnie 🦆</title>
   <style>
       body {
       font-family: Arial, sans-serif;
       max-width: 900px;
       margin: 40px auto;
       padding: 20px;
-      background: #ffffff; /* ZMIANA: Bia艂e t艂o */
+      background: #ffffff; /* ZMIANA: Białe tło */
       color: #181716; /* ZMIANA: Czarny tekst Univio */
     }
 
@@ -25,7 +25,7 @@
     }
 
     .card {
-      background: #f8f8f8; /* ZMIANA: Jasne t艂o kart */
+      background: #f8f8f8; /* ZMIANA: Jasne tło kart */
       padding: 20px;
       border-radius: 12px;
       border: 1px solid #dddddd; /* ZMIANA: Jasna ramka */
@@ -47,20 +47,20 @@
       color: #181716;
       margin-bottom: 16px;
       font-size: 16px; /* ZMIANA: Zapobiega auto-zoomowi na iOS */
-      box-sizing: border-box; /* ZMIANA: Naprawia szeroko艣膰 p贸l tekstowych */
+      box-sizing: border-box; /* ZMIANA: Naprawia szerokość pól tekstowych */
     }
 
     button {
       padding: 12px 16px;
       border: none;
       border-radius: 8px;
-      background: #ff7800; /* ZMIANA: Pomara艅czowy Univio */
+      background: #ff7800; /* ZMIANA: Pomarańczowy Univio */
       color: white;
       font-weight: bold;
       cursor: pointer;
       margin-right: 8px;
       margin-bottom: 8px;
-      touch-action: manipulation; /* ZMIANA: Szybkie klikanie bez przybli偶ania ekranu */
+      touch-action: manipulation; /* ZMIANA: Szybkie klikanie bez przybliżania ekranu */
     }
 
         .secondary-btn {
@@ -407,27 +407,27 @@
 
   <div id="homeScreen" class="grid">
     <div class="card">
-      <h2>Utw贸rz pok贸j</h2>
+      <h2>Utwórz pokój</h2>
 
-      <label for="hostName">Twoje imi臋</label>
-      <input id="hostName" type="text" placeholder="Np. Micha艂" />
+      <label for="hostName">Twoje imię</label>
+      <input id="hostName" type="text" placeholder="Np. Michał" />
 
-      <button id="createRoomBtn">Utw贸rz pok贸j</button>
+      <button id="createRoomBtn">Utwórz pokój</button>
 
       <div id="createMessage"></div>
       <div id="createResult"></div>
     </div>
 
     <div class="card">
-      <h2>Do艂膮cz do pokoju</h2>
+      <h2>Dołącz do pokoju</h2>
 
-      <label for="joinName">Twoje imi臋</label>
+      <label for="joinName">Twoje imię</label>
       <input id="joinName" type="text" placeholder="Np. Anna" />
 
       <label for="roomCode">Kod pokoju</label>
       <input id="roomCode" type="text" placeholder="Np. ABC123" />
 
-            <button id="joinRoomBtn">Do艂膮cz do pokoju</button>
+            <button id="joinRoomBtn">Dołącz do pokoju</button>
 
       <div id="joinMessage"></div>
       <div id="joinResult"></div>
@@ -436,30 +436,30 @@
     <div class="card lobby-help-card" style="grid-column: 1 / -1;">
       <h2>Instrukcja gry i lobby</h2>
 
-      <h3>Jak to dzia艂a?</h3>
+      <h3>Jak to działa?</h3>
       <ul>
-        <li><strong>Host</strong> tworzy pok贸j i przekazuje jego kod pozosta艂ym graczom.</li>
-        <li>Pozostali gracze wpisuj膮 swoje imi臋 oraz <strong>kod pokoju</strong>, aby do艂膮czy膰.</li>
-        <li>Po wej艣ciu do pokoju wszyscy trafiaj膮 do <strong>lobby</strong>, gdzie wida膰 list臋 graczy i status pokoju.</li>
-        <li>Gdy wszyscy gracze s膮 gotowi, <strong>host uruchamia gr臋</strong> przyciskiem <strong>"Rozpocznij gr臋"</strong>.</li>
-        <li>Po uruchomieniu gry status pokoju zmienia si臋 na <strong>active</strong>.</li>
-        <li>Status pokoju oraz lista graczy od艣wie偶aj膮 si臋 <strong>automatycznie</strong>.</li>
-        <li>Gdy pok贸j jest aktywny, gracze mog膮 klikn膮膰 <strong>"Przejd藕 do gry"</strong>.</li>
+        <li><strong>Host</strong> tworzy pokój i przekazuje jego kod pozostałym graczom.</li>
+        <li>Pozostali gracze wpisują swoje imię oraz <strong>kod pokoju</strong>, aby dołączyć.</li>
+        <li>Po wejściu do pokoju wszyscy trafiają do <strong>lobby</strong>, gdzie widać listę graczy i status pokoju.</li>
+        <li>Gdy wszyscy gracze są gotowi, <strong>host uruchamia grę</strong> przyciskiem <strong>"Rozpocznij grę"</strong>.</li>
+        <li>Po uruchomieniu gry status pokoju zmienia się na <strong>active</strong>.</li>
+        <li>Status pokoju oraz lista graczy odświeżają się <strong>automatycznie</strong>.</li>
+        <li>Gdy pokój jest aktywny, gracze mogą kliknąć <strong>"Przejdź do gry"</strong>.</li>
       </ul>
 
-      <h3>Co robi膮 przyciski w lobby?</h3>
+      <h3>Co robią przyciski w lobby?</h3>
       <ul>
-        <li><strong>Rozpocznij gr臋</strong> 鈥?uruchamia rozgrywk臋; ten przycisk widzi tylko host.</li>
-        <li><strong>Przejd藕 do gry</strong> 鈥?otwiera plansz臋 gry, gdy pok贸j ma status <strong>active</strong>.</li>
-        <li><strong>Wr贸膰 do ekranu startowego</strong> 鈥?wraca do strony g艂贸wnej aplikacji.</li>
+        <li><strong>Rozpocznij grę</strong> – uruchamia rozgrywkę; ten przycisk widzi tylko host.</li>
+        <li><strong>Przejdź do gry</strong> – otwiera planszę gry, gdy pokój ma status <strong>active</strong>.</li>
+        <li><strong>Wróć do ekranu startowego</strong> – wraca do strony głównej aplikacji.</li>
       </ul>
 
       <h3>Co po grze?</h3>
       <ul>
-        <li>Po zako艅czeniu rozgrywki pok贸j otrzymuje status <strong>finished</strong>.</li>
+        <li>Po zakończeniu rozgrywki pokój otrzymuje status <strong>finished</strong>.</li>
         <li>W lobby pozostaje widoczna <strong>lista graczy i ranking</strong>.</li>
-        <li>Zwyci臋zca jest oznaczony <strong>koron膮 馃憫</strong>.</li>
-        <li>Je艣li gra zosta艂a zako艅czona, ranking jest ju偶 ostateczny.</li>
+        <li>Zwycięzca jest oznaczony <strong>koroną 👑</strong>.</li>
+        <li>Jeśli gra została zakończona, ranking jest już ostateczny.</li>
       </ul>
     </div>
   </div>
@@ -469,19 +469,19 @@
       <h2>Lobby pokoju</h2>
       <p><strong>Kod pokoju:</strong> <code id="lobbyRoomCode"></code></p>
       <p><strong>Status:</strong> <span id="lobbyStatus"></span></p>
-      <p><strong>Twoje imi臋:</strong> <span id="lobbyPlayerName"></span></p>
+      <p><strong>Twoje imię:</strong> <span id="lobbyPlayerName"></span></p>
 
       <div id="hostControls" class="hidden">
-        <button id="startGameBtn">Rozpocznij gr臋</button>
+        <button id="startGameBtn">Rozpocznij grę</button>
       </div>
 
       <h3>Gracze w pokoju</h3>
       <ul id="playersList"></ul>
 
-      <button id="refreshPlayersBtn" class="secondary-btn hidden">Od艣wie偶 list臋 graczy</button>
-      <button id="refreshRoomBtn" class="secondary-btn hidden">Od艣wie偶 status pokoju</button>
-      <button id="goToGameBtn" class="secondary-btn hidden">Przejd藕 do gry</button>
-      <button id="backBtn" class="secondary-btn">Wr贸膰 do ekranu startowego</button>
+      <button id="refreshPlayersBtn" class="secondary-btn hidden">Odśwież listę graczy</button>
+      <button id="refreshRoomBtn" class="secondary-btn hidden">Odśwież status pokoju</button>
+      <button id="goToGameBtn" class="secondary-btn hidden">Przejdź do gry</button>
+      <button id="backBtn" class="secondary-btn">Wróć do ekranu startowego</button>
 
             <div id="lobbyMessage"></div>
     </div>
@@ -539,23 +539,23 @@
   </div>
 </div>
 
-            <!-- Niewidoczne pole wywo艂uj膮ce klawiatur臋 smartfona -->
+            <!-- Niewidoczne pole wywołujące klawiaturę smartfona -->
   <input id="mobileInput" type="text" style="opacity: 0; position: absolute; z-index: -1; width: 1px; height: 1px;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
 
-<button id="submitGuessBtn" class="hidden">Wy艣lij pr贸b臋</button>
-	  <button id="backToLobbyBtn" class="secondary-btn hidden">Wr贸膰 do lobby</button>
+<button id="submitGuessBtn" class="hidden">Wyślij próbę</button>
+	  <button id="backToLobbyBtn" class="secondary-btn hidden">Wróć do lobby</button>
       
 	  <div id="keyboard" class="keyboard">
   <div class="key-row">
-    <button class="key" data-key="膭">膭</button>
-    <button class="key" data-key="膯">膯</button>
-    <button class="key" data-key="臉">臉</button>
-    <button class="key" data-key="艁">艁</button>
-    <button class="key" data-key="脫">脫</button>
-    <button class="key" data-key="艢">艢</button>
-    <button class="key" data-key="艃">艃</button>
-    <button class="key" data-key="呕">呕</button>
-    <button class="key" data-key="殴">殴</button>
+    <button class="key" data-key="Ą">Ą</button>
+    <button class="key" data-key="Ć">Ć</button>
+    <button class="key" data-key="Ę">Ę</button>
+    <button class="key" data-key="Ł">Ł</button>
+    <button class="key" data-key="Ó">Ó</button>
+    <button class="key" data-key="Ś">Ś</button>
+    <button class="key" data-key="Ń">Ń</button>
+    <button class="key" data-key="Ż">Ż</button>
+    <button class="key" data-key="Ź">Ź</button>
   </div>
   <div class="key-row">
     <button class="key" data-key="Q">Q</button>
@@ -589,7 +589,7 @@
     <button class="key" data-key="B">B</button>
     <button class="key" data-key="N">N</button>
     <button class="key" data-key="M">M</button>
-    <button class="key wide" data-key="BACKSPACE">鈱?/button>
+    <button class="key wide" data-key="BACKSPACE">⌫</button>
   </div>
 </div>
 
@@ -604,30 +604,30 @@
     <div style="text-align: center; margin-bottom: 10px;">
       <img src="duck_questions_20.png" alt="Kaczka instrukcja" style="height: 120px;" />
     </div>
-    <h2 id="helpTitle">Jak gra膰?</h2>
-    <p>Masz 6 pr贸b, aby odgadn膮膰 ukryte 5-literowe s艂owo.</p>
+    <h2 id="helpTitle">Jak grać?</h2>
+    <p>Masz 6 prób, aby odgadnąć ukryte 5-literowe słowo.</p>
 
     <div class="legend">
       <div class="legend-item">
         <div class="legend-box correct"></div>
-        <div><strong>Zielony</strong> 鈥?litera jest na w艂a艣ciwym miejscu</div>
+        <div><strong>Zielony</strong> – litera jest na właściwym miejscu</div>
       </div>
       <div class="legend-item">
         <div class="legend-box present"></div>
-        <div><strong>呕贸艂ty</strong> 鈥?litera jest w ha艣le, ale na innym miejscu</div>
+        <div><strong>Żółty</strong> – litera jest w haśle, ale na innym miejscu</div>
       </div>
       <div class="legend-item">
         <div class="legend-box absent"></div>
-        <div><strong>Szary</strong> 鈥?tej litery nie ma w ha艣le</div>
+        <div><strong>Szary</strong> – tej litery nie ma w haśle</div>
       </div>
     </div>
 
         <ul>
-      <li>Wszyscy gracze w pokoju zgaduj膮 to samo 5-literowe has艂o.</li>
-      <li>S艂owa wpisujesz na planszy 鈥?dzia艂a klawiatura fizyczna oraz ekranowa.</li>
-      <li>Masz 6 pr贸b. Po odgadni臋ciu has艂a lub po 6. pr贸bie gra si臋 ko艅czy.</li>
-      <li>Wygrywa gracz z <strong>najmniejsz膮 liczb膮 pr贸b</strong>. Przy remisie decyduje czas!</li>
-      <li>Po zako艅czeniu gry <strong>wr贸膰 do lobby</strong>, aby sprawdzi膰 ranking i zobaczy膰, kto zdoby艂 koron臋 馃憫.</li>
+      <li>Wszyscy gracze w pokoju zgadują to samo 5-literowe hasło.</li>
+      <li>Słowa wpisujesz na planszy – działa klawiatura fizyczna oraz ekranowa.</li>
+      <li>Masz 6 prób. Po odgadnięciu hasła lub po 6. próbie gra się kończy.</li>
+      <li>Wygrywa gracz z <strong>najmniejszą liczbą prób</strong>. Przy remisie decyduje czas!</li>
+      <li>Po zakończeniu gry <strong>wróć do lobby</strong>, aby sprawdzić ranking i zobaczyć, kto zdobył koronę 👑.</li>
     </ul>
 
         <div class="modal-actions">
@@ -640,10 +640,10 @@
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="endGameTitle">
     <h2 id="endGameTitle">Koniec gry!</h2>
     <div id="endGameContent" style="margin-bottom: 20px; text-align: center; font-size: 18px;">
-      <!-- Tutaj za pomoc膮 JavaScript wstawimy wynik, czas i has艂o -->
+      <!-- Tutaj za pomocą JavaScript wstawimy wynik, czas i hasło -->
     </div>
     <div class="modal-actions">
-      <button id="endGameBackToLobbyBtn">Wr贸膰 do lobby</button>
+      <button id="endGameBackToLobbyBtn">Wróć do lobby</button>
     </div>
   </div>
 </div>
@@ -658,47 +658,47 @@
 
     const WORDS = [
       // TWOJE ORYGINALNE RZECZOWNIKI (100)
-      "BLASK","BARAN","B艁OTO","BURAK","BURZA","CEG艁A","CHATA","CHLEB","DESKA","DZWON",
-      "G艁OWA","GROCH","ISKRA","JAJKO","KAMYK","KARTA","KASZA","KLUCZ","KREDA","KRZAK",
+      "BLASK","BARAN","BŁOTO","BURAK","BURZA","CEGŁA","CHATA","CHLEB","DESKA","DZWON",
+      "GŁOWA","GROCH","ISKRA","JAJKO","KAMYK","KARTA","KASZA","KLUCZ","KREDA","KRZAK",
       "LAMPA","MASKA","MISKA","MUCHA","PALMA","PALEC","PASEK","PLAMA","POMOC","POTOK",
-      "PROSO","PR臉GA","PSOTA","RZEPA","SADZA","SERCE","SKALA","SKIBA","S艁OMA","SMUGA",
-      "SOSNA","艢CIEG","艢LIWA","SZAFA","SZATA","SZNUR","SZRON","TABUN","TOP脫R","TRAWA",
-      "BRZEG","CIER艃","GRUDA","KOCYK","KWOKA","LARWA","MI臉SO","OGR脫D","OKRUS","PI脫RO",
-      "SFORA","STR脫J","艢RODA","TKACZ","WANNA","W膭TEK","WRZOS","ZAJ膭C","ZORZA","艁AWKA",
-      "艁Y呕KA","JUCHA","N臉DZA","WYDRA","SUTEK","B臉BEN","BRONA","DYMEK","GA艁膭殴","G膭SKA",
-      "GWARA","K艁ODA","KROWA","NORKA","OWIES","PUCHA","SZEPT","ZBO呕E","MIED殴","ROWEK",
-      "BREJA","CZAPA","GNIEW","LILIA","P艁UCA","SID艁O","STRUG","呕ARNA","WR臉GA","GRAPA",
+      "PROSO","PRĘGA","PSOTA","RZEPA","SADZA","SERCE","SKALA","SKIBA","SŁOMA","SMUGA",
+      "SOSNA","ŚCIEG","ŚLIWA","SZAFA","SZATA","SZNUR","SZRON","TABUN","TOPÓR","TRAWA",
+      "BRZEG","CIERŃ","GRUDA","KOCYK","KWOKA","LARWA","MIĘSO","OGRÓD","OKRUS","PIÓRO",
+      "SFORA","STRÓJ","ŚRODA","TKACZ","WANNA","WĄTEK","WRZOS","ZAJĄC","ZORZA","ŁAWKA",
+      "ŁYŻKA","JUCHA","NĘDZA","WYDRA","SUTEK","BĘBEN","BRONA","DYMEK","GAŁĄŹ","GĄSKA",
+      "GWARA","KŁODA","KROWA","NORKA","OWIES","PUCHA","SZEPT","ZBOŻE","MIEDŹ","ROWEK",
+      "BREJA","CZAPA","GNIEW","LILIA","PŁUCA","SIDŁO","STRUG","ŻARNA","WRĘGA","GRAPA",
       
       // CZASOWNIKI (100)
-      "BADA膯","BAWI膯","BEKA膯","BUJA膯","BYWA膯","COFA膯","DAWA膯","D膭SA膯","D膭呕Y膯","DODA膯",
-      "DOLA膯","DRZE膯","DRWI膯","DUSI膯","DYMA膯","GADA膯","GAPI膯","GASI膯","GIN膭膯","GOLI膯",
-      "GONI膯","GUBI膯","IGRA膯","JADA膯","KAZA膯","K膭PA膯","KOPA膯","KOSI膯","KROI膯","KUKA膯",
-      "KUPI膯","KUSI膯","LATA膯","LEPI膯","LIZA膯","LUBI膯","艁APA膯","艁ASI膯","艁ATA膯","艁OWI膯",
-      "艁UPI膯","MACA膯","MAMI膯","MAZA膯","MIJA膯","MIN膭膯","MOTA膯","M脫WI膯","MRZE膯","MYLI膯",
-      "NADA膯","NALA膯","N臉CI膯","NOSI膯","OBJ膭膯","OBIEC","OBMY膯","ODDA膯","ODKU膯","OPIEC",
-      "ORZEC","OPA艢膯","OTRU膯","OWIA膯","PADA膯","PALI膯","P臉KA膯","PIJA膯","PIKA膯","PISA膯",
-      "POCI膯","PODA膯","POLA膯","PUKA膯","PYTA膯","RANI膯","RAZI膯","R膭BA膯","ROBI膯","RONI膯",
-      "SIKA膯","SKRY膯","SOLI膯","SPA艢膯","SUN膭膯","SYKA膯","SYPA膯","TOPI膯","TON膭膯","TRWA膯",
-      "TRZE膯","TUPA膯","TYKA膯","UBIEC","UCZY膯","UGI膭膯","UKRY膯","UPA艢膯","UPIEC","WABI膯",
+      "BADAĆ","BAWIĆ","BEKAĆ","BUJAĆ","BYWAĆ","COFAĆ","DAWAĆ","DĄSAĆ","DĄŻYĆ","DODAĆ",
+      "DOLAĆ","DRZEĆ","DRWIĆ","DUSIĆ","DYMAĆ","GADAĆ","GAPIĆ","GASIĆ","GINĄĆ","GOLIĆ",
+      "GONIĆ","GUBIĆ","IGRAĆ","JADAĆ","KAZAĆ","KĄPAĆ","KOPAĆ","KOSIĆ","KROIĆ","KUKAĆ",
+      "KUPIĆ","KUSIĆ","LATAĆ","LEPIĆ","LIZAĆ","LUBIĆ","ŁAPAĆ","ŁASIĆ","ŁATAĆ","ŁOWIĆ",
+      "ŁUPIĆ","MACAĆ","MAMIĆ","MAZAĆ","MIJAĆ","MINĄĆ","MOTAĆ","MÓWIĆ","MRZEĆ","MYLIĆ",
+      "NADAĆ","NALAĆ","NĘCIĆ","NOSIĆ","OBJĄĆ","OBIEC","OBMYĆ","ODDAĆ","ODKUĆ","OPIEC",
+      "ORZEC","OPAŚĆ","OTRUĆ","OWIAĆ","PADAĆ","PALIĆ","PĘKAĆ","PIJAĆ","PIKAĆ","PISAĆ",
+      "POCIĆ","PODAĆ","POLAĆ","PUKAĆ","PYTAĆ","RANIĆ","RAZIĆ","RĄBAĆ","ROBIĆ","RONIĆ",
+      "SIKAĆ","SKRYĆ","SOLIĆ","SPAŚĆ","SUNĄĆ","SYKAĆ","SYPAĆ","TOPIĆ","TONĄĆ","TRWAĆ",
+      "TRZEĆ","TUPAĆ","TYKAĆ","UBIEC","UCZYĆ","UGIĄĆ","UKRYĆ","UPAŚĆ","UPIEC","WABIĆ",
 
-      // PRZYS艁脫WKI (50)
-      "B艁AHO","BLADO","BOSKO","CHORO","CHY呕O","CICHO","CZULE","D艁UGO","DROGO","DZIKO",
-      "G臉STO","GRUBO","JASNO","JUTRO","LEKKO","艁ATWO","M臉TNO","MNIEJ","MOCNO","MOKRO",
-      "NADAL","NAGLE","NIECO","NIGDY","NISKO","NUDNO","OSTRO","PE艁NO","PEWNO","POTEM",
-      "PUSTO","R脫WNO","SK膭PO","S艁ABO","S艁ONO","SPORO","SROGO","STALE","SUCHO","SZARO",
-      "艢LEPO","TANIO","TERAZ","TY艁EM","W膭SKO","WCALE","WOLNO","ZARAZ","ZNOWU","呕脫艁TO",
+      // PRZYSŁÓWKI (50)
+      "BŁAHO","BLADO","BOSKO","CHORO","CHYŻO","CICHO","CZULE","DŁUGO","DROGO","DZIKO",
+      "GĘSTO","GRUBO","JASNO","JUTRO","LEKKO","ŁATWO","MĘTNO","MNIEJ","MOCNO","MOKRO",
+      "NADAL","NAGLE","NIECO","NIGDY","NISKO","NUDNO","OSTRO","PEŁNO","PEWNO","POTEM",
+      "PUSTO","RÓWNO","SKĄPO","SŁABO","SŁONO","SPORO","SROGO","STALE","SUCHO","SZARO",
+      "ŚLEPO","TANIO","TERAZ","TYŁEM","WĄSKO","WCALE","WOLNO","ZARAZ","ZNOWU","ŻÓŁTO",
 
       // PRZYMIOTNIKI (100)
-      "BIA艁Y","BLADY","B艁AHY","B艁OGI","BOSKI","BUTNY","CELNY","CHORY","CHUDY","CHY呕Y",
-      "CICHY","CZU艁Y","D艁UGI","DOBRY","DOLNY","DROGI","DUMNY","DZIKI","FAJNY","G臉STY",
-      "GIBKI","G艁UPI","GODNY","G脫RNY","GRUBY","HOJNY","JASNY","KORNY","KR臉PY","KRYTY",
-      "LEPKI","LETNI","LICHY","LOTNY","艁ATWY","艁ZAWY","M膭DRY","M臉TNY","M艁ODY","MODNY",
-      "MOKRY","NIEMY","NUDNY","OBYTY","OSTRY","OTY艁Y","PALNY","PARNY","PE艁NY","PEWNY",
-      "PITNY","PIWNY","P艁OWY","POLNY","P脫殴NY","PRAWY","PRUTY","PSTRY","PUSTY","RANNY",
-      "R膭CZY","RODNY","ROS艁Y","R脫WNY","SENNY","SETNY","SILNY","SK膭PY","SKORY","S艁ABY",
-      "S艁ONY","SNUTY","SOLNY","SPORY","SROGI","STARY","SUCHY","SYPKI","SZARY","艢LEPY",
-      "TAJNY","TRUTY","UBOGI","UDANY","UMYTY","WARTY","W膭SKI","WINNY","WODNY","WOLNY",
-      "ZBITY","ZIMNY","ZNANY","ZRYTY","Z艁OTY","呕膭DNY","呕脫艁TY","呕YTNI","JASNY","DROGI"
+      "BIAŁY","BLADY","BŁAHY","BŁOGI","BOSKI","BUTNY","CELNY","CHORY","CHUDY","CHYŻY",
+      "CICHY","CZUŁY","DŁUGI","DOBRY","DOLNY","DROGI","DUMNY","DZIKI","FAJNY","GĘSTY",
+      "GIBKI","GŁUPI","GODNY","GÓRNY","GRUBY","HOJNY","JASNY","KORNY","KRĘPY","KRYTY",
+      "LEPKI","LETNI","LICHY","LOTNY","ŁATWY","ŁZAWY","MĄDRY","MĘTNY","MŁODY","MODNY",
+      "MOKRY","NIEMY","NUDNY","OBYTY","OSTRY","OTYŁY","PALNY","PARNY","PEŁNY","PEWNY",
+      "PITNY","PIWNY","PŁOWY","POLNY","PÓŹNY","PRAWY","PRUTY","PSTRY","PUSTY","RANNY",
+      "RĄCZY","RODNY","ROSŁY","RÓWNY","SENNY","SETNY","SILNY","SKĄPY","SKORY","SŁABY",
+      "SŁONY","SNUTY","SOLNY","SPORY","SROGI","STARY","SUCHY","SYPKI","SZARY","ŚLEPY",
+      "TAJNY","TRUTY","UBOGI","UDANY","UMYTY","WARTY","WĄSKI","WINNY","WODNY","WOLNY",
+      "ZBITY","ZIMNY","ZNANY","ZRYTY","ZŁOTY","ŻĄDNY","ŻÓŁTY","ŻYTNI","JASNY","DROGI"
     ].filter(w => w.length === 5);
 
         let currentRoom = null;
@@ -706,7 +706,7 @@
     let currentIsHost = false;
     let currentPlayer = null;
     let liveGuess = '';
-    let lobbyInterval = null; // --- ZMIANA: Zmienna trzymaj膮ca automatyczne od艣wie偶anie ---
+    let lobbyInterval = null; // --- ZMIANA: Zmienna trzymająca automatyczne odświeżanie ---
 	
 	function saveSession() {
   localStorage.setItem('retro_currentRoom', JSON.stringify(currentRoom));
@@ -820,11 +820,11 @@ const closeHelpBtn = document.getElementById('closeHelpBtn');
         if (!data) return code;
       }
 
-      throw new Error('Nie uda艂o si臋 wygenerowa膰 unikalnego kodu pokoju.');
+      throw new Error('Nie udało się wygenerować unikalnego kodu pokoju.');
     }
 
         function renderHostControls() {
-      // --- ZMIANA: Pokazuj tylko hostowi i tylko wtedy, gdy gra jeszcze nie wystartowa艂a ---
+      // --- ZMIANA: Pokazuj tylko hostowi i tylko wtedy, gdy gra jeszcze nie wystartowała ---
       if (currentIsHost && currentRoom && currentRoom.status === 'waiting') {
         hostControlsEl.classList.remove('hidden');
       } else {
@@ -839,7 +839,7 @@ const closeHelpBtn = document.getElementById('closeHelpBtn');
       } else {
         goToGameBtn.classList.add('hidden');
       }
-      // --- ZMIANA: Wymu艣 aktualizacj臋 przycisku hosta przy ka偶dej zmianie statusu (np. po starcie) ---
+      // --- ZMIANA: Wymuś aktualizację przycisku hosta przy każdej zmianie statusu (np. po starcie) ---
       renderHostControls();
       // --- KONIEC ZMIANY ---
     }
@@ -863,43 +863,24 @@ const closeHelpBtn = document.getElementById('closeHelpBtn');
       saveSession();
       loadPlayers();
 
-      // Czyszczenie starego kanału, jeśli istnieje
-if (roomChannel) supabase.removeChannel(roomChannel);
-
-// Tworzymy kanał nasłuchujący zmian
-roomChannel = supabase.channel(`room-updates-${currentRoom.id}`)
-  // Nasłuchuj zmian w tabeli rooms (np. start gry przez hosta)
-  .on('postgres_changes', { 
-    event: 'UPDATE', 
-    schema: 'public', 
-    table: 'rooms', 
-    filter: `id=eq.${currentRoom.id}` 
-  }, (payload) => {
-    refreshRoomStatus();
-  })
-  // Nasłuchuj zmian w tabeli players (ktoś dołącza, rozwiązuje hasło itp.)
-  .on('postgres_changes', { 
-    event: '*', // reaguj na INSERT (nowy gracz) i UPDATE (wynik)
-    schema: 'public', 
-    table: 'players', 
-    filter: `room_id=eq.${currentRoom.id}` 
-  }, (payload) => {
-    loadPlayers();
-  })
-  .subscribe();
+      // --- ZMIANA: Uruchomienie automatycznego odświeżania (co 3 sekundy) ---
+      if (lobbyInterval) clearInterval(lobbyInterval);
+      lobbyInterval = setInterval(() => {
+        refreshRoomStatus();
+        loadPlayers();
+      }, 3000);
+      // --- KONIEC ZMIANY ---
     }
 
     function showGame() {
   if (!currentRoom || !currentPlayer) return;
 
-// Zamiast lub obok:
-// if (lobbyInterval) { clearInterval(lobbyInterval); lobbyInterval = null; }
-
-// Wklej to w showGame() oraz showHome():
-if (roomChannel) {
-  supabase.removeChannel(roomChannel);
-  roomChannel = null;
-}
+  // --- ZMIANA: Zatrzymanie odświeżania ---
+  if (lobbyInterval) {
+    clearInterval(lobbyInterval);
+    lobbyInterval = null;
+  }
+  // --- KONIEC ZMIANY ---
 
   lobbyScreen.classList.add('hidden');
   gameScreen.classList.remove('hidden');
@@ -919,14 +900,12 @@ if (roomChannel) {
       currentPlayer = null;
       clearSession();
 
-// Zamiast lub obok:
-// if (lobbyInterval) { clearInterval(lobbyInterval); lobbyInterval = null; }
-
-// Wklej to w showGame() oraz showHome():
-if (roomChannel) {
-  supabase.removeChannel(roomChannel);
-  roomChannel = null;
-}
+      // --- ZMIANA: Zatrzymanie odświeżania ---
+      if (lobbyInterval) {
+        clearInterval(lobbyInterval);
+        lobbyInterval = null;
+      }
+      // --- KONIEC ZMIANY ---
 
       lobbyScreen.classList.add('hidden');
       gameScreen.classList.add('hidden');
@@ -957,8 +936,8 @@ if (roomChannel) {
     renderGoToGameButton();
 
         if (room.status === 'finished') {
-      showMessage(lobbyMessageEl, 'Gra zako艅czona. Ranking jest ju偶 ostateczny.', 'success');
-      // --- ZMIANA: Zatrzymanie od艣wie偶ania po zako艅czeniu gry ---
+      showMessage(lobbyMessageEl, 'Gra zakończona. Ranking jest już ostateczny.', 'success');
+      // --- ZMIANA: Zatrzymanie odświeżania po zakończeniu gry ---
       if (lobbyInterval) {
         clearInterval(lobbyInterval);
         lobbyInterval = null;
@@ -968,7 +947,7 @@ if (roomChannel) {
       showMessage(lobbyMessageEl, `Status pokoju: ${room.status}`, 'success');
     }
   } catch (error) {
-    showMessage(lobbyMessageEl, `B艂膮d: ${error.message}`);
+    showMessage(lobbyMessageEl, `Błąd: ${error.message}`);
   }
 }
 
@@ -976,7 +955,7 @@ async function loadPlayers() {
   if (!currentRoom) return;
 
   clearMessage(lobbyMessageEl);
-  playersListEl.innerHTML = '<li>艁adowanie...</li>';
+  playersListEl.innerHTML = '<li>Ładowanie...</li>';
 
   try {
     const { data, error } = await supabase
@@ -1021,26 +1000,26 @@ async function loadPlayers() {
         let statusText = 'W trakcie gry';
 
         if (player.solved === true) {
-          statusText = `Odgad艂 w ${player.attempts_used} pr贸bach`;
+          statusText = `Odgadł w ${player.attempts_used} próbach`;
         } else if (player.finished_at && player.solved === false) {
-          statusText = `Nie odgad艂 w 6 pr贸bach`;
+          statusText = `Nie odgadł w 6 próbach`;
         }
 
-        const crown = player.is_winner ? ' 馃憫' : '';
+        const crown = player.is_winner ? ' 👑' : '';
         const place = `${index + 1}.`;
 
         return `
           <li>
             <strong>${place} ${player.name}</strong>${crown}
             ${player.is_host ? '<span class="host-badge">Host</span>' : ''}
-            鈥?${statusText}
+            — ${statusText}
           </li>
         `;
       })
       .join('');
   } catch (error) {
     playersListEl.innerHTML = '';
-    showMessage(lobbyMessageEl, `B艂膮d: ${error.message}`);
+    showMessage(lobbyMessageEl, `Błąd: ${error.message}`);
   }
 }
 
@@ -1182,7 +1161,7 @@ async function animateLastGuessRow(guessWord, attemptNumber) {
 async function loadMyGuesses(skipLastRow = false) {
   if (!currentPlayer) return [];
 
-  guessesListEl.innerHTML = '<li>艁adowanie...</li>';
+  guessesListEl.innerHTML = '<li>Ładowanie...</li>';
 
   try {
     const { data, error } = await supabase
@@ -1200,18 +1179,18 @@ async function loadMyGuesses(skipLastRow = false) {
     renderLiveGuess();
 
     if (guesses.length === 0) {
-      guessesListEl.innerHTML = '<li>Brak pr贸b.</li>';
+      guessesListEl.innerHTML = '<li>Brak prób.</li>';
       return guesses;
     }
 
     guessesListEl.innerHTML = guesses
-      .map(guess => `<li>Pr贸ba ${guess.attempt_number}: ${guess.guess_word}</li>`)
+      .map(guess => `<li>Próba ${guess.attempt_number}: ${guess.guess_word}</li>`)
       .join('');
 
     return guesses;
   } catch (error) {
     guessesListEl.innerHTML = '';
-    showMessage(gameMessageEl, `B艂膮d: ${error.message}`);
+    showMessage(gameMessageEl, `Błąd: ${error.message}`);
     return [];
   }
 }
@@ -1235,7 +1214,7 @@ function handleGameKeyboard(event) {
     return;
   }
 
-  if (/^[A-Z膭膯臉艁艃脫艢呕殴]$/.test(key) && liveGuess.length < 5) {
+  if (/^[A-ZĄĆĘŁŃÓŚŻŹ]$/.test(key) && liveGuess.length < 5) {
     liveGuess += key;
     renderLiveGuess();
   }
@@ -1249,12 +1228,12 @@ async function submitGuess() {
 const guessWord = liveGuess.trim().toUpperCase();
 
   if (!guessWord) {
-    showMessage(gameMessageEl, 'Wpisz s艂owo.');
+    showMessage(gameMessageEl, 'Wpisz słowo.');
     return;
   }
 
   if (guessWord.length !== 5) {
-    showMessage(gameMessageEl, 'S艂owo musi mie膰 5 liter.');
+    showMessage(gameMessageEl, 'Słowo musi mieć 5 liter.');
     return;
   }
 
@@ -1282,12 +1261,12 @@ const guessWord = liveGuess.trim().toUpperCase();
     currentPlayer = freshPlayer;
 
     if (currentPlayer.solved === true) {
-      showMessage(gameMessageEl, 'Ju偶 odgad艂e艣 has艂o. Nie mo偶esz wysy艂a膰 kolejnych pr贸b.', 'error');
+      showMessage(gameMessageEl, 'Już odgadłeś hasło. Nie możesz wysyłać kolejnych prób.', 'error');
       return;
     }
 
     if (currentPlayer.finished_at && currentPlayer.solved === false) {
-      showMessage(gameMessageEl, 'Gra dla Ciebie ju偶 si臋 zako艅czy艂a. Wykorzysta艂e艣 wszystkie pr贸by.', 'error');
+      showMessage(gameMessageEl, 'Gra dla Ciebie już się zakończyła. Wykorzystałeś wszystkie próby.', 'error');
       return;
     }
 
@@ -1303,7 +1282,7 @@ const guessWord = liveGuess.trim().toUpperCase();
     const attemptNumber = (existingGuesses?.length || 0) + 1;
 
     if (attemptNumber > 6) {
-      showMessage(gameMessageEl, 'Wykorzysta艂e艣 ju偶 6 pr贸b.');
+      showMessage(gameMessageEl, 'Wykorzystałeś już 6 prób.');
       return;
     }
 
@@ -1374,15 +1353,15 @@ const guessWord = liveGuess.trim().toUpperCase();
         timeText = minutes > 0 ? `${minutes} min ${seconds} s` : `${seconds} s`;
       }
       
-      document.getElementById('endGameTitle').textContent = "Uda艂o si臋! 馃帀";
+      document.getElementById('endGameTitle').textContent = "Udało się! 🎉";
       document.getElementById('endGameContent').innerHTML = `
         <div style="text-align: center; margin-bottom: 15px;">
           <img src="duck_champagne_5.png" alt="Kaczka z szampanem" style="height: 120px;" />
         </div>
-        <p>Odgad艂e艣 has艂o <strong>${secretWordNormalized}</strong>!</p>
-        <p>Liczba pr贸b: <strong>${attemptNumber}</strong></p>
-        <p>Tw贸j czas: <strong>${timeText}</strong></p>
-        <p style="margin-top: 15px; font-size: 16px; color: #a8a8a8;">Wr贸膰 do lobby, aby sprawdzi膰 ranking i zobaczy膰, czy uda艂o Ci si臋 wygra膰! 馃憫</p>
+        <p>Odgadłeś hasło <strong>${secretWordNormalized}</strong>!</p>
+        <p>Liczba prób: <strong>${attemptNumber}</strong></p>
+        <p>Twój czas: <strong>${timeText}</strong></p>
+        <p style="margin-top: 15px; font-size: 16px; color: #a8a8a8;">Wróć do lobby, aby sprawdzić ranking i zobaczyć, czy udało Ci się wygrać! 👑</p>
       `;
       document.getElementById('endGameModal').classList.add('open');
       document.getElementById('endGameModal').setAttribute('aria-hidden', 'false');
@@ -1412,8 +1391,8 @@ const guessWord = liveGuess.trim().toUpperCase();
         <div style="text-align: center; margin-bottom: 15px;">
           <img src="duck_4.png" alt="Kaczka koniec gry" style="height: 120px;" />
         </div>
-        <p>Niestety, nie uda艂o si臋 odgadn膮膰 w 6 pr贸bach 馃槩</p>
-        <p>Prawid艂owe has艂o to: <strong>${secretWordNormalized}</strong></p>
+        <p>Niestety, nie udało się odgadnąć w 6 próbach 😢</p>
+        <p>Prawidłowe hasło to: <strong>${secretWordNormalized}</strong></p>
       `;
       document.getElementById('endGameModal').classList.add('open');
       document.getElementById('endGameModal').setAttribute('aria-hidden', 'false');
@@ -1422,7 +1401,7 @@ const guessWord = liveGuess.trim().toUpperCase();
     } else {
       showMessage(
         gameMessageEl,
-        `Zapisano pr贸b臋 nr ${attemptNumber}.`,
+        `Zapisano próbę nr ${attemptNumber}.`,
         'success'
       );
     }
@@ -1456,7 +1435,7 @@ const guessWord = liveGuess.trim().toUpperCase();
 await loadMyGuesses(true);
 await animateLastGuessRow(guessWord, attemptNumber);
   } catch (error) {
-    showMessage(gameMessageEl, `B艂膮d: ${error.message}`);
+    showMessage(gameMessageEl, `Błąd: ${error.message}`);
   } finally {
     submitGuessBtn.disabled = false;
   }
@@ -1484,9 +1463,9 @@ await animateLastGuessRow(guessWord, attemptNumber);
         lobbyStatusEl.textContent = updatedRoom.status;
         renderGoToGameButton();
 
-        showMessage(lobbyMessageEl, 'Gra zosta艂a rozpocz臋ta. Status pokoju zmieniony na active.', 'success');
+        showMessage(lobbyMessageEl, 'Gra została rozpoczęta. Status pokoju zmieniony na active.', 'success');
       } catch (error) {
-        showMessage(lobbyMessageEl, `B艂膮d: ${error.message}`);
+        showMessage(lobbyMessageEl, `Błąd: ${error.message}`);
       } finally {
         startGameBtn.disabled = false;
       }
@@ -1499,7 +1478,7 @@ await animateLastGuessRow(guessWord, attemptNumber);
       const hostName = hostNameInput.value.trim();
 
       if (!hostName) {
-        showMessage(createMessageEl, 'Wpisz swoje imi臋.');
+        showMessage(createMessageEl, 'Wpisz swoje imię.');
         return;
       }
 
@@ -1534,7 +1513,7 @@ await animateLastGuessRow(guessWord, attemptNumber);
 
         if (playerError) throw playerError;
 
-        showMessage(createMessageEl, 'Pok贸j zosta艂 utworzony.', 'success');
+        showMessage(createMessageEl, 'Pokój został utworzony.', 'success');
         createResultEl.innerHTML = `
           <p><strong>Kod pokoju:</strong> <code>${room.code}</code></p>
           <p><strong>Host:</strong> ${hostName}</p>
@@ -1542,7 +1521,7 @@ await animateLastGuessRow(guessWord, attemptNumber);
 
         showLobby(room, hostName, true, player);
       } catch (error) {
-        showMessage(createMessageEl, `B艂膮d: ${error.message}`);
+        showMessage(createMessageEl, `Błąd: ${error.message}`);
       } finally {
         createRoomBtn.disabled = false;
       }
@@ -1556,7 +1535,7 @@ await animateLastGuessRow(guessWord, attemptNumber);
       const roomCode = roomCodeInput.value.trim().toUpperCase();
 
       if (!playerName) {
-        showMessage(joinMessageEl, 'Wpisz swoje imi臋.');
+        showMessage(joinMessageEl, 'Wpisz swoje imię.');
         return;
       }
 
@@ -1593,16 +1572,16 @@ await animateLastGuessRow(guessWord, attemptNumber);
 
         if (playerError) throw playerError;
 
-        showMessage(joinMessageEl, 'Do艂膮czono do pokoju.', 'success');
+        showMessage(joinMessageEl, 'Dołączono do pokoju.', 'success');
         joinResultEl.innerHTML = `
-          <p><strong>Pok贸j:</strong> <code>${room.code}</code></p>
-          <p><strong>Twoje imi臋:</strong> ${playerName}</p>
+          <p><strong>Pokój:</strong> <code>${room.code}</code></p>
+          <p><strong>Twoje imię:</strong> ${playerName}</p>
           <p><strong>Status pokoju:</strong> ${room.status}</p>
         `;
 
         showLobby(room, playerName, false, player);
       } catch (error) {
-        showMessage(joinMessageEl, `B艂膮d: ${error.message}`);
+        showMessage(joinMessageEl, `Błąd: ${error.message}`);
       } finally {
         joinRoomBtn.disabled = false;
       }
@@ -1633,7 +1612,7 @@ await animateLastGuessRow(guessWord, attemptNumber);
   });
 });
 
-// --- ZMIANA: Obs艂uga natywnej klawiatury na telefonach ---
+// --- ZMIANA: Obsługa natywnej klawiatury na telefonach ---
 document.getElementById('gameBoard').addEventListener('click', () => {
   if (!gameScreen.classList.contains('hidden')) {
     mobileInput.value = liveGuess;
@@ -1642,7 +1621,7 @@ document.getElementById('gameBoard').addEventListener('click', () => {
 });
 
 mobileInput.addEventListener('input', (e) => {
-  let val = e.target.value.toUpperCase().replace(/[^A-Z膭膯臉艁艃脫艢呕殴]/g, '');
+  let val = e.target.value.toUpperCase().replace(/[^A-ZĄĆĘŁŃÓŚŻŹ]/g, '');
   if (val.length > 5) val = val.slice(0, 5);
   liveGuess = val;
   e.target.value = liveGuess;
@@ -1650,7 +1629,7 @@ mobileInput.addEventListener('input', (e) => {
 });
 
 mobileInput.addEventListener('keydown', (e) => {
-  e.stopPropagation(); // Zapobiega konfliktom z klawiatur膮 komputerow膮
+  e.stopPropagation(); // Zapobiega konfliktom z klawiaturą komputerową
   if (e.key === 'Enter' || e.key === 'Go') {
     submitGuess();
   }
@@ -1693,7 +1672,7 @@ console.log('VIRTUAL KEY:', key);
     return;
   }
 
-  if (/^[A-Z膭膯臉艁艃脫艢呕殴]$/.test(key) && liveGuess.length < 5) {
+  if (/^[A-ZĄĆĘŁŃÓŚŻŹ]$/.test(key) && liveGuess.length < 5) {
     liveGuess += key;
     renderLiveGuess();
   }
