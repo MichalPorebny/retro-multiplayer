@@ -863,24 +863,39 @@ const closeHelpBtn = document.getElementById('closeHelpBtn');
       saveSession();
       loadPlayers();
 
-      // --- ZMIANA: Uruchomienie automatycznego odświeżania (co 3 sekundy) ---
-      if (lobbyInterval) clearInterval(lobbyInterval);
-      lobbyInterval = setInterval(() => {
-        refreshRoomStatus();
-        loadPlayers();
-      }, 3000);
-      // --- KONIEC ZMIANY ---
+      // Czyszczenie starego kanału, jeśli istnieje
+if (roomChannel) supabase.removeChannel(roomChannel);
+
+// Tworzymy kanał nasłuchujący zmian
+roomChannel = supabase.channel(`room-updates-${currentRoom.id}`)
+  // Nasłuchuj zmian w tabeli rooms (np. start gry przez hosta)
+  .on('postgres_changes', { 
+    event: 'UPDATE', 
+    schema: 'public', 
+    table: 'rooms', 
+    filter: `id=eq.${currentRoom.id}` 
+  }, (payload) => {
+    refreshRoomStatus();
+  })
+  // Nasłuchuj zmian w tabeli players (ktoś dołącza, rozwiązuje hasło itp.)
+  .on('postgres_changes', { 
+    event: '*', // reaguj na INSERT (nowy gracz) i UPDATE (wynik)
+    schema: 'public', 
+    table: 'players', 
+    filter: `room_id=eq.${currentRoom.id}` 
+  }, (payload) => {
+    loadPlayers();
+  })
+  .subscribe();
     }
 
     function showGame() {
   if (!currentRoom || !currentPlayer) return;
 
-  // --- ZMIANA: Zatrzymanie odświeżania ---
-  if (lobbyInterval) {
-    clearInterval(lobbyInterval);
-    lobbyInterval = null;
-  }
-  // --- KONIEC ZMIANY ---
+  if (roomChannel) {
+  supabase.removeChannel(roomChannel);
+  roomChannel = null;
+}
 
   lobbyScreen.classList.add('hidden');
   gameScreen.classList.remove('hidden');
@@ -900,12 +915,10 @@ const closeHelpBtn = document.getElementById('closeHelpBtn');
       currentPlayer = null;
       clearSession();
 
-      // --- ZMIANA: Zatrzymanie odświeżania ---
-      if (lobbyInterval) {
-        clearInterval(lobbyInterval);
-        lobbyInterval = null;
-      }
-      // --- KONIEC ZMIANY ---
+      if (roomChannel) {
+  supabase.removeChannel(roomChannel);
+  roomChannel = null;
+}
 
       lobbyScreen.classList.add('hidden');
       gameScreen.classList.add('hidden');
