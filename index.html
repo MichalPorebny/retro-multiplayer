@@ -702,11 +702,12 @@
     ].filter(w => w.length === 5);
 
         let currentRoom = null;
-    let currentPlayerName = '';
-    let currentIsHost = false;
-    let currentPlayer = null;
-    let liveGuess = '';
-    let lobbyInterval = null; // --- ZMIANA: Zmienna trzymająca automatyczne odświeżanie ---
+let currentPlayerName = '';
+let currentIsHost = false;
+let currentPlayer = null;
+let liveGuess = '';
+let lobbyInterval = null; 
+let roomChannel = null; // <-- TEJ LINII BRAKUJE // --- ZMIANA: Zmienna trzymaj?ca automatyczne od?wie?anie ---
 	
 	function saveSession() {
   localStorage.setItem('retro_currentRoom', JSON.stringify(currentRoom));
