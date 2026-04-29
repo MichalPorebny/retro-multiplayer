@@ -473,6 +473,8 @@
 
       <div id="hostControls" class="hidden">
         <button id="startGameBtn">Rozpocznij grę</button>
+        <!-- NOWY PRZYCISK: -->
+        <button id="playAgainBtn" class="hidden">Zagraj ponownie</button>
       </div>
 
       <h3>Gracze w pokoju</h3>
@@ -770,6 +772,7 @@ function restoreSession() {
     const lobbyMessageEl = document.getElementById('lobbyMessage');
     const hostControlsEl = document.getElementById('hostControls');
     const startGameBtn = document.getElementById('startGameBtn');
+	const playAgainBtn = document.getElementById('playAgainBtn'); // <-- NOWA LINIA
     const goToGameBtn = document.getElementById('goToGameBtn');
 
     const gameRoomCodeEl = document.getElementById('gameRoomCode');
@@ -824,14 +827,25 @@ const closeHelpBtn = document.getElementById('closeHelpBtn');
       throw new Error('Nie udało się wygenerować unikalnego kodu pokoju.');
     }
 
-        function renderHostControls() {
-      // --- ZMIANA: Pokazuj tylko hostowi i tylko wtedy, gdy gra jeszcze nie wystartowała ---
-      if (currentIsHost && currentRoom && currentRoom.status === 'waiting') {
-        hostControlsEl.classList.remove('hidden');
-      } else {
+    function renderHostControls() {
+      if (!currentIsHost || !currentRoom) {
         hostControlsEl.classList.add('hidden');
+        return;
       }
-      // --- KONIEC ZMIANY ---
+      
+      hostControlsEl.classList.remove('hidden');
+
+      if (currentRoom.status === 'waiting') {
+        startGameBtn.classList.remove('hidden');
+        playAgainBtn.classList.add('hidden');
+      } else if (currentRoom.status === 'finished') {
+        startGameBtn.classList.add('hidden');
+        playAgainBtn.classList.remove('hidden');
+      } else {
+        // Gdy gra trwa (status 'active'), chowamy oba
+        startGameBtn.classList.add('hidden');
+        playAgainBtn.classList.add('hidden');
+      }
     }
 
     function renderGoToGameButton() {
@@ -1484,6 +1498,65 @@ await animateLastGuessRow(guessWord, attemptNumber);
         startGameBtn.disabled = false;
       }
     }
+	
+	    async function playAgain() {
+      if (!currentRoom || !currentIsHost) return;
+
+      clearMessage(lobbyMessageEl);
+      playAgainBtn.disabled = true;
+
+      try {
+        // 1. Kasujemy stare próby (tutaj zadziała nowa polityka RLS z poprzedniego kroku)
+        const { error: deleteError } = await supabase
+          .from('guesses')
+          .delete()
+          .eq('room_id', currentRoom.id);
+        if (deleteError) throw deleteError;
+
+        // 2. Zerujemy statystyki wszystkich graczy w tym pokoju
+        const { error: resetPlayersError } = await supabase
+          .from('players')
+          .update({
+            solved: null,
+            attempts_used: null,
+            solved_at: null,
+            finished_at: null,
+            is_winner: false
+          })
+          .eq('room_id', currentRoom.id);
+        if (resetPlayersError) throw resetPlayersError;
+
+        // 3. Losujemy nowe słowo i resetujemy status pokoju
+        const newWord = pickRandomWord();
+        const { data: updatedRoom, error: resetRoomError } = await supabase
+          .from('rooms')
+          .update({
+            status: 'waiting',
+            secret_word: newWord,
+            started_at: null,
+            ended_at: null
+          })
+          .eq('id', currentRoom.id)
+          .select()
+          .single();
+        if (resetRoomError) throw resetRoomError;
+
+        currentRoom = updatedRoom;
+        
+        // Wymuszamy natychmiastowe odświeżenie UI u Hosta
+        lobbyStatusEl.textContent = updatedRoom.status;
+        renderGoToGameButton();
+        showMessage(lobbyMessageEl, 'Pokój zresetowany! Gotowi do nowej gry.', 'success');
+        
+        // (Włączony u Ciebie wcześniej mechanizm Realtime lub setInterval 
+        // automatycznie powiadomi pozostałych graczy i wyczyści ich widoki)
+
+      } catch (error) {
+        showMessage(lobbyMessageEl, `Błąd resetowania gry: ${error.message}`);
+      } finally {
+        playAgainBtn.disabled = false;
+      }
+    }
 
     async function createRoom() {
       clearMessage(createMessageEl);
@@ -1608,8 +1681,10 @@ await animateLastGuessRow(guessWord, attemptNumber);
     backBtn.addEventListener('click', showHome);
     startGameBtn.addEventListener('click', startGame);
     goToGameBtn.addEventListener('click', showGame);
-        submitGuessBtn.addEventListener('click', submitGuess);
+    submitGuessBtn.addEventListener('click', submitGuess);
     backToLobbyBtn.addEventListener('click', () => showLobby(currentRoom, currentPlayerName, currentIsHost, currentPlayer));
+	startGameBtn.addEventListener('click', startGame);
+    playAgainBtn.addEventListener('click', playAgain); // <-- NOWA LINIA
     
     // --- ZMIANA: Przycisk powrotu w nowym modalu ---
     document.getElementById('endGameBackToLobbyBtn').addEventListener('click', () => {
